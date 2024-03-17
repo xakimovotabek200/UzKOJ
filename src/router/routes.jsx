@@ -7,6 +7,9 @@ import {
   Registered,
   Stats,
 } from "../pages";
+import Login from "../components/Login";
+
+const token = sessionStorage.getItem("token");
 
 export const routes = [
   {
@@ -14,7 +17,7 @@ export const routes = [
     path: "/",
     title: "Home",
     icon: <span className="fa-solid fa-home" />,
-    element: <Home />,
+    element: token ? <Home /> : <Login />,
   },
 
   {
@@ -22,7 +25,7 @@ export const routes = [
     path: "/documents",
     title: "Documents",
     icon: <span className="fa-solid fa-circle-check" />,
-    element: <Documents />,
+    element: token ? <Documents /> : <Login />,
   },
   {
     key: 2,
@@ -36,7 +39,7 @@ export const routes = [
     key: 3,
     path: "/members",
     title: "Members",
-    element: <Members />,
+    element: token ? <Members /> : <Login />,
     icon: <span className="fa-solid fa-layer-group" />,
   },
   {
@@ -44,14 +47,14 @@ export const routes = [
     path: "/problems",
     title: "Problems",
     icon: <span className="fa-solid fa-user-tie" />,
-    element: <Problems />,
+    element: token ? <Problems /> : <Login />,
   },
   {
     key: 5,
     path: "/registered",
     title: "Registered",
     icon: <span className="fa-solid fa-user-group" />,
-    element: <Registered />,
+    element: token ? <Registered /> : <Login />,
   },
 
   {
@@ -59,6 +62,6 @@ export const routes = [
     path: "/stats",
     title: "Stats",
     icon: <span className="fa-solid fa-list-check" />,
-    element: <Stats />,
+    element: token ? <Stats /> : <Login />,
   },
 ];

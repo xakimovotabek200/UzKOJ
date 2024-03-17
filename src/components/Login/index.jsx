@@ -9,10 +9,10 @@ const index = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { user_name, password } = e.target;
+      const { email, password } = e.target;
       const response = await axios
         .post("auth/authenticate", {
-          user_name: user_name.value,
+          email: email.value,
           password: password.value,
         })
         .finally(() => {
@@ -21,7 +21,7 @@ const index = () => {
       if (response.data.access_token) {
         toast.success("Authentication successful");
         sessionStorage.setItem("token", response.data.access_token);
-        window.location.replace("/admin");
+        window.location.replace("/");
       } else {
         toast.error("Authentication failed");
       }
@@ -30,9 +30,6 @@ const index = () => {
     }
   }
 
-  if (sessionStorage.getItem("token")) {
-    return window.location.replace("/admin");
-  }
   return (
     <div>
       {" "}
@@ -44,14 +41,14 @@ const index = () => {
           <form class="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label class="label">
-                <span class="text-base label-text">User Name</span>
+                <span class="text-base label-text">Email</span>
               </label>
               <input
-                type="text"
-                placeholder="User name"
+                type="email"
+                placeholder="enter your email address"
                 class="w-full input input-bordered input-primary"
                 required
-                name="user_name"
+                name="email"
               />
             </div>
             <div>
