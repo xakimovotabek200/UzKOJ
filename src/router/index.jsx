@@ -1,8 +1,8 @@
 import React, { useLayoutEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./components/Login";
-import { routes } from "./router/routes";
+import Login from "../components/Login";
+import { routes } from "../router/routes";
 
 const index = () => {
   const { pathname } = useLocation();
@@ -13,6 +13,7 @@ const index = () => {
     const isActive = location.pathname === path;
     return isActive;
   };
+
   useLayoutEffect(() => {
     window.scroll({ left: 0, top: 0 });
   }, [pathname]);
