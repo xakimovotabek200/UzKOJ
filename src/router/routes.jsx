@@ -6,6 +6,7 @@ import {
   Problems,
   Registered,
   Stats,
+  User,
 } from "../pages";
 import Home from "../components/Home";
 
@@ -62,5 +63,13 @@ export const routes = [
     title: "Stats",
     icon: <span className="fa-solid fa-list-check" />,
     element: token ? <Stats /> : <Login />,
+  },
+
+  {
+    key: 6,
+    path: "/user",
+    title: "Tumanga Yangi Xodim Yaratish",
+    icon: <span className="fa-solid fa-list-check" />,
+    element: token ? <User /> : <Login />,
   },
 ];

@@ -25,7 +25,7 @@ const index = () => {
       });
 
       if (response.status === 201) {
-        toast.success("Material post successful");
+        toast.success("User post successful");
       }
     } catch (error) {
       toast.error("Error submitting material post:");
@@ -33,16 +33,16 @@ const index = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <button
         className="btn btn-accent"
         onClick={() => document.getElementById("my_modal_1").showModal()}
       >
         + yangi qoshish
       </button>
-      <dialog id="my_modal_1" className="modal">
+      <dialog id="my_modal_1" className="modal ">
         <form onSubmit={handleSubmit}>
-          <div className="modal-box">
+          <div className="modal-box w-[750px]">
             {" "}
             <div>
               <label class="label">
@@ -54,7 +54,7 @@ const index = () => {
                 placeholder="enter username"
                 class="w-full input input-bordered input-primary"
                 required
-                name="text"
+                name="username"
               />
             </div>
             <div>
