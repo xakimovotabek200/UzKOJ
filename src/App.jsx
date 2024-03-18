@@ -1,9 +1,10 @@
 import React from "react";
+import Router from "./router/index";
 
 const App = () => {
   return (
     <div>
-      <button className="btn">Hello !!!</button>
+      <Router />
     </div>
   );
 };
