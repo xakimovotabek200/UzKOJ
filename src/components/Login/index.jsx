@@ -19,8 +19,8 @@ const Login = ({ setIsLoggedIn }) => {
           setLoading(false);
         });
       if (response.data.access_token) {
-        toast.success("Authentication successful");
         sessionStorage.setItem("token", response.data.access_token);
+        window.location.reload();
         setIsLoggedIn(true);
       } else {
         toast.error("Authentication failed");

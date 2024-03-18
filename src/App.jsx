@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Provider } from "react-redux";
+import { store } from "./redux";
 import Router from "./router/index";
 import Login from "./components/Login";
 
@@ -33,9 +35,11 @@ const App = () => {
   }
 
   return (
-    <div>
-      {isLoggedIn ? <Router /> : <Login setIsLoggedIn={setIsLoggedIn} />}
-    </div>
+    <Provider store={store}>
+      <div>
+        {isLoggedIn ? <Router /> : <Login setIsLoggedIn={setIsLoggedIn} />}
+      </div>
+    </Provider>
   );
 };
 
