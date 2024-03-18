@@ -1,13 +1,13 @@
+import Login from "../components/Login";
 import {
   Documents,
-  Home,
   Events,
   Members,
   Problems,
   Registered,
   Stats,
 } from "../pages";
-import Login from "../components/Login";
+import Home from "../components/Home";
 
 const token = sessionStorage.getItem("token");
 
@@ -32,8 +32,7 @@ export const routes = [
     path: "/events",
     title: "Events",
     icon: <span className="fa-solid fa-layer-group" />,
-    element: <Events />,
-    isLink: true,
+    element: token ? <Events /> : <Login />,
   },
   {
     key: 3,
