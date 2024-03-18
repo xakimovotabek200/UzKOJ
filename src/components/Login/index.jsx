@@ -40,7 +40,7 @@ const Login = ({ setIsLoggedIn }) => {
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="label">
-                <span className="text-base label-text">Email</span>
+                <span className="text-base ">Email</span>
               </label>
               <input
                 type="email"
@@ -52,7 +52,7 @@ const Login = ({ setIsLoggedIn }) => {
             </div>
             <div>
               <label className="label">
-                <span className="text-base label-text">Password</span>
+                <span className="text-base">Password</span>
               </label>
               <input
                 type="password"
