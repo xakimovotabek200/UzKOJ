@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import { routes } from "../../router/routes";
 
 const Index = () => {
