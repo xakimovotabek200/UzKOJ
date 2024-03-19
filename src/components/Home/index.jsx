@@ -17,7 +17,7 @@ const Index = () => {
 
   return (
     <div>
-      <ul className="pt-2 w-full grid grid-cols-3">
+      <ul className="pt-2 w-full grid grid-cols-4 text-center">
         {routes.map((Menu, index) => (
           <NavLink
             to={Menu.path}
@@ -26,27 +26,29 @@ const Index = () => {
             onClick={() => setActivePath(Menu.path)}
           >
             <div
-              className="card bg-primary text-primary-content"
+              className="py-5"
               style={{
                 backgroundColor: isMenuItemActive(Menu.path)
                   ? "red"
                   : "whitesmoke",
               }}
             >
-              <span
-                className={`text-4xl text-center ${
-                  isMenuItemActive(Menu.path) ? "text-white" : "text-black"
-                }`}
-              >
-                {Menu.icon}
-              </span>
-              <p
-                className={`text-xl font-semibold pl-4 ${
-                  isMenuItemActive(Menu.path) ? "text-white" : "text-black"
-                }`}
-              >
-                {Menu.title}
-              </p>
+              <div className="">
+                <span
+                  className={`text-4xl  ${
+                    isMenuItemActive(Menu.path) ? "text-white" : "text-black"
+                  }`}
+                >
+                  {Menu.icon}
+                </span>
+                <p
+                  className={`text-xl font-semibold pl-4 ${
+                    isMenuItemActive(Menu.path) ? "text-white" : "text-black"
+                  }`}
+                >
+                  {Menu.title}
+                </p>
+              </div>
             </div>
           </NavLink>
         ))}
