@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { Button, Text, Translated, H1 } from "../../components";
 
 const index = () => {
   const [formData, setFormData] = useState({
@@ -18,11 +19,7 @@ const index = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("users", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post("users", formData);
 
       if (response.status === 201) {
         toast.success("User post successful");
@@ -34,95 +31,42 @@ const index = () => {
 
   return (
     <div className="">
-      <button
-        className="btn btn-accent"
-        onClick={() => document.getElementById("my_modal_1").showModal()}
-      >
-        + yangi qoshish
-      </button>
-      <dialog id="my_modal_1" className="modal ">
-        <form onSubmit={handleSubmit}>
-          <div className="modal-box w-[750px]">
-            {" "}
-            <div>
-              <label class="label">
-                <span class="text-base label-text">User Name</span>
-              </label>
-              <input
-                type="username"
-                onChange={handleInputChange}
-                placeholder="enter username"
-                class="w-full input input-bordered input-primary"
-                required
-                name="username"
-              />
-            </div>
-            <div>
-              <label class="label">
-                <span class="text-base label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                onChange={handleInputChange}
-                placeholder="enter password"
-                class="w-full input input-bordered input-primary"
-                required
-                name="password"
-              />
-            </div>
-            <div>
-              <label class="label">
-                <span class="text-base label-text">region</span>
-              </label>
-              <input
-                type="text"
-                onChange={handleInputChange}
-                placeholder="enter region"
-                class="w-full input input-bordered input-primary"
-                required
-                name="region"
-              />
-            </div>
-            <button className="btn btn-success w-full mt-5">Submit</button>
-            <div className="modal-action">
-              <form method="dialog">
-                <button className="btn">Close</button>
-              </form>
-            </div>
-          </div>
-        </form>
-      </dialog>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+      <div className="w-full flex items-center justify-between gap-5">
+        <H1>
+          <Translated>Ro'yxatda turganlar</Translated>
+        </H1>
+        <Button
+          className="bg-blue-500 text-white"
+          onClick={() => document.getElementById("my_modal_1").showModal()}
+        >
+          <Text>
+            <Translated>+ Yangi qo'shish</Translated>
+          </Text>
+        </Button>
+      </div>
+      <div className="overflow-x-auto mt-5">
+        <table className="table w-full bg-white text-center border">
+          <thead className="border">
+            <tr className="border">
+              <th className="border p-1"></th>
+              <th className="border p-1">
+                <Text>Name</Text>
+              </th>
+              <th className="border p-1">
+                <Text>Job</Text>
+              </th>
+              <th className="border p-1">
+                <Text>Favorite Color</Text>
+              </th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>Blue</td>
-            </tr>
-            {/* row 2 */}
-            <tr>
-              <th>2</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-              <td>Purple</td>
-            </tr>
-            {/* row 3 */}
-            <tr>
-              <th>3</th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-              <td>Red</td>
+            <tr className="border">
+              <th className="border">1</th>
+              <td className="border">Cy Ganderton</td>
+              <td className="border">Quality Control Specialist</td>
+              <td className="border">Blue</td>
             </tr>
           </tbody>
         </table>
