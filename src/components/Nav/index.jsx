@@ -46,10 +46,13 @@ const index = () => {
         <div className="flex items-center gap-5">
           {/* accesibility */}
           <details className="relative">
-            <summary className="flex">
-              <P role={"button"}>
+            <summary role={"button"} className="flex items-center gap-1">
+              <P>
                 <span className="fa-solid fa-eye" />
               </P>
+              <Text>
+                <Translated>Maxsus imkoniyatlar</Translated>
+              </Text>
             </summary>
             <div className="absolute right-0 bg-white text-black rounded-md p-2 z-50 flex flex-col gap-2 border shadow-lg shadow-black/35">
               <div>
