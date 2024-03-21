@@ -36,7 +36,7 @@ const PostProblems = ({ getData }) => {
   return (
     <div>
       {" "}
-      <Dialog title="Muammo" success={success}>
+      <Dialog title="salom" btntitle="Muammo qo'shish" success={success}>
         <form onSubmit={handleSubmit}>
           <div className="modal-box w-[750px]">
             <div>
