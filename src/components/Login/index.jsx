@@ -10,14 +10,10 @@ const Login = ({ setIsLoggedIn }) => {
     setLoading(true);
     try {
       const { email, password } = e.target;
-      const response = await axios
-        .post("auth/authenticate", {
-          email: email.value,
-          password: password.value,
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      const response = await axios.post("auth/authenticate", {
+        email: email.value,
+        password: password.value,
+      });
       if (response.data.access_token) {
         sessionStorage.setItem("token", response.data.access_token);
         window.location.reload();
@@ -26,7 +22,13 @@ const Login = ({ setIsLoggedIn }) => {
         toast.error("Authentication failed");
       }
     } catch (error) {
-      toast.error("Error during authentication");
+      if (error.response && error.response.status === 401) {
+        toast.error("Invalid email or password");
+      } else {
+        toast.error("Error during authentication");
+      }
+    } finally {
+      setLoading(false);
     }
   }
 

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import PostUser from "./PostUser";
 import axios from "axios";
-import { Button, Text, Translated, H1 } from "../../components";
+import React, { useEffect, useState } from "react";
+import { H1, Text, Translated } from "../../components";
+import DeleteUser from "./DeleteUser";
+import PostUser from "./PostUser";
 
 const Index = () => {
   const [data, setData] = useState([]);
@@ -50,6 +51,9 @@ const Index = () => {
                   <th className="border">{index + 1}</th>
                   <td className="border">{item.username}</td>
                   <td className="border">{item.region}</td>
+                  <td className="border">
+                    <DeleteUser item={item} getData={getData} />
+                  </td>
                 </tr>
               ))
             ) : (

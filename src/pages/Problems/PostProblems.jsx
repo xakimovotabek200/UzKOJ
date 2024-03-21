@@ -24,7 +24,7 @@ const PostProblems = ({ getData }) => {
       const response = await axios.post("problems", formData);
 
       if (response.status === 201) {
-        toast.success("User post successful");
+        toast.success("Problems post successful");
         setSuccess(true);
         getData();
       }
