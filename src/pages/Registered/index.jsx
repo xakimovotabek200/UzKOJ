@@ -4,31 +4,6 @@ import { toast } from "react-toastify";
 import { Button, Text, Translated, H1 } from "../../components";
 
 const index = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    region: "",
-  });
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("users", formData);
-
-      if (response.status === 201) {
-        toast.success("User post successful");
-      }
-    } catch (error) {
-      toast.error("Error submitting material post:");
-    }
-  };
-
   return (
     <div className="">
       <div className="w-full flex items-center justify-between gap-5">

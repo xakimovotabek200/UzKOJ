@@ -1,9 +1,15 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Button from "../Button";
 import { Text, Translated } from "../Typography";
 
 const index = (props) => {
   const ref = useRef();
+
+  useEffect(() => {
+    if (props.success) {
+      ref.current.close();
+    }
+  }, [props]);
 
   return (
     <>
@@ -18,7 +24,7 @@ const index = (props) => {
 
       <dialog
         ref={ref}
-        className="w-6/12 bg-white border rounded p-3 backdrop:bg-black/40"
+        className="w-6/12 bg-white border rounded p-3 backdrop:bg-black/40 "
       >
         <div className="flex items-center justify-between pb-2 border-b border-black/30 mb-3">
           <Text>
