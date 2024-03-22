@@ -4,13 +4,11 @@ import { Button, Dialog, P } from "../../components";
 import { toast } from "react-toastify";
 
 const DeleteProblems = ({ item, getData }) => {
-  const ref = useRef();
-
   const [success, setSuccess] = useState(false);
 
   async function handleDelete() {
     try {
-      const res = await axios.delete(`/problems/${item.id}`);
+      const res = await axios.delete(`/events/${item.id}`);
       if (res.status === 204) {
         getData();
         setSuccess(true);

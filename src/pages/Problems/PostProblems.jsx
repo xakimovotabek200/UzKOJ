@@ -22,7 +22,6 @@ const PostProblems = ({ getData }) => {
     e.preventDefault();
     try {
       const response = await axios.post("problems", formData);
-
       if (response.status === 201) {
         toast.success("Problems post successful");
         setSuccess(true);
@@ -36,7 +35,7 @@ const PostProblems = ({ getData }) => {
   return (
     <div>
       {" "}
-      <Dialog title="salom" btntitle="Muammo qo'shish" success={success}>
+      <Dialog title="salom" btntitle="+ Muammo qo'shish" success={success}>
         <form onSubmit={handleSubmit}>
           <div className="modal-box w-[750px]">
             <div>

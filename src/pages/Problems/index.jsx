@@ -33,7 +33,7 @@ const index = () => {
         <table className="table w-full bg-white text-center border">
           <thead className="border">
             <tr className="border">
-              <th className="border p-2"></th>
+              <th className="border p-2">#</th>
               <th className="border p-2">
                 <Text>Name</Text>
               </th>

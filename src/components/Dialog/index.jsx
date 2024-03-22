@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { twMerge } from "tailwind-merge";
 import Button from "../Button";
 import { Text, Translated } from "../Typography";
 
@@ -15,7 +16,7 @@ const index = (props) => {
     <>
       <Button
         onClick={() => ref.current.showModal()}
-        className="bg-blue-500 text-white"
+        className={twMerge("bg-blue-500 text-white")}
       >
         {props.btntitle}
       </Button>
