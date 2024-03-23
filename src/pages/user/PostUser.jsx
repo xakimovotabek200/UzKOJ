@@ -37,7 +37,7 @@ const PostUser = ({ getData }) => {
   };
   return (
     <div>
-      <Dialog title="Admin" success={success}>
+      <Dialog title="salom" btntitle="+ Adminww qo'shish" success={success}>
         <form onSubmit={handleSubmit}>
           <div className="modal-box w-[750px]">
             <div>
