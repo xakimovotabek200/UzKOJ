@@ -7,6 +7,8 @@ import {
   Registered,
   Stats,
   User,
+  // hidden pages
+  AddRegisteredUser,
 } from "../pages";
 import Home from "../components/Home";
 
@@ -20,7 +22,6 @@ export const routes = [
     icon: <span className="fa-solid fa-home" />,
     element: token ? <Home /> : <Login />,
   },
-
   {
     key: 1,
     path: "/documents",
@@ -65,10 +66,18 @@ export const routes = [
   },
 
   {
-    key: 6,
+    key: 7,
     path: "/user",
     title: "Tumanga admin yaratish",
     icon: <span className="fa-solid fa-user-shield" />,
     element: token ? <User /> : <Login />,
+  },
+];
+
+export const hiddenRoutes = [
+  {
+    key: 100,
+    path: "/register-user",
+    element: token ? <AddRegisteredUser /> : <Login />,
   },
 ];

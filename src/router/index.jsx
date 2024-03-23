@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { routes } from "../router/routes";
+import { hiddenRoutes, routes } from "../router/routes";
 import { Navbar } from "../components";
 import { useSelector } from "react-redux";
 
@@ -18,6 +18,9 @@ const index = () => {
       <div className="p-10">
         <Routes>
           {routes?.map((route, ind) => (
+            <Route key={ind} path={route.path} element={route.element} />
+          ))}
+          {hiddenRoutes?.map((route, ind) => (
             <Route key={ind} path={route.path} element={route.element} />
           ))}
         </Routes>

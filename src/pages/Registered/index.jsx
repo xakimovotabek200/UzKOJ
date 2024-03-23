@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Text, Translated, H1 } from "../../components";
 
@@ -10,14 +11,11 @@ const index = () => {
         <H1>
           <Translated>Ro'yxatda turganlar</Translated>
         </H1>
-        <Button
-          className="bg-blue-500 text-white"
-          onClick={() => document.getElementById("my_modal_1").showModal()}
-        >
-          <Text>
-            <Translated>+ Yangi qo'shish</Translated>
-          </Text>
-        </Button>
+        <Link to={"/register-user"}>
+          <Button className="bg-blue-500 text-white">
+            <Translated>+ A'zo qo'shish</Translated>
+          </Button>
+        </Link>
       </div>
       <div className="overflow-x-auto mt-5">
         <table className="table w-full bg-white text-center border">
