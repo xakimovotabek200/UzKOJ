@@ -16,7 +16,9 @@ const index = (props) => {
     <>
       <Button
         onClick={() => ref.current.showModal()}
-        className={twMerge("bg-blue-500 text-white")}
+        className={twMerge(
+          `relative bg-blue-500 text-white ${props.btnClasses}`
+        )}
       >
         {props.btntitle}
       </Button>
