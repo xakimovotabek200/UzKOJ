@@ -8,7 +8,9 @@ const index = () => {
         <H1>
           <Translated>Kerakli hujjatlar</Translated>
         </H1>
-        <Dialog title="Hujjat">input</Dialog>
+        <Dialog title="Hujjat qo'shish" btntitle="+ Hujjat qo'shish">
+          input
+        </Dialog>
       </div>
     </div>
   );
