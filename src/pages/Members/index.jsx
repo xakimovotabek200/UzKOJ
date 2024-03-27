@@ -77,16 +77,32 @@ const index = () => {
             {/* row 1 */}
             {data?.map?.((item, ind) => (
               <tr key={ind} className="border">
-                <th className="border">{ind + 1}</th>
-                <td className="border">{item?.fullName}</td>
-                <td className="border">{item?.birthDate}</td>
-                <td className="border">{item?.address}</td>
-                <td className="border">{item?.phoneNumber}</td>
-                <td className="border">
-                  {item?.passportSeries + " " + item?.passportNumber}
+                <th className="border p-1">
+                  <Text>{ind + 1}</Text>
+                </th>
+                <td className="border p-1">
+                  <Text>{item?.fullName}</Text>
                 </td>
-                <td className="border">{item?.state}</td>
-                <td className="border">{item?.groupNumber}</td>
+                <td className="border p-1">
+                  <Text>{item?.birthDate}</Text>
+                </td>
+                <td className="border p-1">
+                  <Text>{item?.address}</Text>
+                </td>
+                <td className="border p-1">
+                  <Text>{item?.phoneNumber}</Text>
+                </td>
+                <td className="border p-1">
+                  <Text>
+                    {item?.passportSeries + " " + item?.passportNumber}
+                  </Text>
+                </td>
+                <td className="border p-1">
+                  <Text>{item?.state}</Text>
+                </td>
+                <td className="border p-1">
+                  <Text>{item?.groupNumber}</Text>
+                </td>
               </tr>
             ))}
             {loading && (
