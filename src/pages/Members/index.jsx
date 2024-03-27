@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import { Button, Text, Translated, H1, Empty, Loading } from "../../components";
+import DeleteMember from "./DeleteMember";
 
 const index = () => {
   const [data, setData] = useState(null);
@@ -71,6 +71,9 @@ const index = () => {
                   <Translated>Nogironlik guruhi</Translated>
                 </Text>
               </th>
+              <th className="border p-1">
+                <span className="fa-solid fa-info-circle" />
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -103,18 +106,21 @@ const index = () => {
                 <td className="border p-1">
                   <Text>{item?.groupNumber}</Text>
                 </td>
+                <td className="border p-1">
+                  <DeleteMember item={item} getData={getData} />
+                </td>
               </tr>
             ))}
             {loading && (
               <tr>
-                <td colSpan={8}>
+                <td colSpan={9}>
                   <Loading />
                 </td>
               </tr>
             )}
             {data?.length === 0 && (
               <tr>
-                <td colSpan={8}>
+                <td colSpan={9}>
                   <Empty />
                 </td>
               </tr>
