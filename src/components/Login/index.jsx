@@ -42,11 +42,11 @@ const Login = ({ setIsLoggedIn }) => {
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="label">
-                <span className="text-base ">Email</span>
+                <span className="text-base ">Foydalanuvchi Nomi</span>
               </label>
               <input
-                type="email"
-                placeholder="enter your email address"
+                type="text"
+                placeholder="Foydalanuvchi nomi"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 required
                 name="email"
@@ -54,11 +54,11 @@ const Login = ({ setIsLoggedIn }) => {
             </div>
             <div>
               <label className="label">
-                <span className="text-base">Password</span>
+                <span className="text-base">Parol</span>
               </label>
               <input
                 type="password"
-                placeholder="Enter Password"
+                placeholder="Parolni kiriting *******"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 required
                 name="password"

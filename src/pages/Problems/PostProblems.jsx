@@ -46,7 +46,7 @@ const PostProblems = () => {
         <input
           type="name"
           onChange={handleInputChange}
-          placeholder="enter name"
+          placeholder="Muammo mavzusini kiriting..."
           className="p-4 border border-black/30 rounded w-full"
           required
           name="name"
@@ -65,7 +65,7 @@ const PostProblems = () => {
           rows="4"
           cols="50"
           onChange={handleInputChange}
-          placeholder="enter fileName"
+          placeholder="Muammo haqida kiriting..."
           className="p-3 border border-black/30 rounded w-full "
           required
           name="fileName"
