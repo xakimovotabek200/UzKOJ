@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import PostEvents from "./PostEvents";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { H1, Translated, Text } from "../../components";
+import { H1, Translated, Text, Button } from "../../components";
 import DeleteEvents from "./DeleteEvents";
+import { Link } from "react-router-dom";
 
 const index = () => {
   const [data, setData] = useState([]);
@@ -27,7 +28,11 @@ const index = () => {
         <H1>
           <Translated>Tadbirlar</Translated>
         </H1>
-        <PostEvents getData={getData} data={data} />
+        <Link to={"/add-event"}>
+          <Button className="bg-blue-500 text-white">
+            <Translated>+ Tadbir qo'shish</Translated>
+          </Button>
+        </Link>
       </div>
       <div className="overflow-x-auto mt-5">
         <table className="table w-full bg-white text-center border">
@@ -35,22 +40,34 @@ const index = () => {
             <tr className="border">
               <th className="border p-2">#</th>
               <th className="border p-2">
-                <Text>Name</Text>
+                <Text>
+                  <Translated>Nomi</Translated>
+                </Text>
               </th>
               <th className="border p-2">
-                <Text>Type</Text>
+                <Text>
+                  <Translated>Turi</Translated>
+                </Text>
               </th>
               <th className="border p-2">
-                <Text>attendeeCount</Text>
+                <Text>
+                  <Translated>Qatnashganlar Soni</Translated>
+                </Text>
               </th>
               <th className="border p-2">
-                <Text>comment</Text>
+                <Text>
+                  <Translated>Izoh</Translated>
+                </Text>
               </th>
               <th className="border p-2">
-                <Text>photo</Text>
+                <Text>
+                  <Translated>Rasmlar</Translated>
+                </Text>
               </th>
               <th className="border p-2">
-                <Text>status</Text>
+                <Text>
+                  <Translated>Holati</Translated>{" "}
+                </Text>
               </th>
               <th className="border p-2">
                 <Text>Action</Text>

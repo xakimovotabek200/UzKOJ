@@ -10,6 +10,7 @@ import {
   // hidden pages
   AddRegisteredUser,
   AddMember,
+  AddEvent,
 } from "../pages";
 import Home from "../components/Home";
 
@@ -85,5 +86,10 @@ export const hiddenRoutes = [
     key: 101,
     path: "/register-member",
     element: token ? <AddMember /> : <Login />,
+  },
+  {
+    key: 102,
+    path: "/add-event",
+    element: token ? <AddEvent /> : <Login />,
   },
 ];
