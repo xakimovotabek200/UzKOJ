@@ -1,10 +1,49 @@
-import React from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Button, Text, Translated } from "../../components";
 
 const AddMember = () => {
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const {
+      fullName,
+      birthDate,
+      groupNumber,
+      address,
+      passportSeries,
+      passportNumber,
+      phoneNumber,
+      state,
+    } = e.target;
+
+    const data = {
+      fullName: fullName.value,
+      birthDate: birthDate.value,
+      groupNumber: groupNumber.value,
+      address: address.value,
+      passportSeries: passportSeries.value,
+      passportNumber: passportNumber.value,
+      phoneNumber: phoneNumber.value,
+      state: state.value,
+    };
+
+    const res = await axios.post("/members", data);
+
+    if (res.status === 201) {
+      e.target.reset();
+      toast.success("Muvaffaqiyatli qo'shildi!");
+      navigate("/members");
+    } else {
+      toast.error("Nimadadir xatolik ketdi! Qayta uruning.");
+    }
+  }
+
   return (
     <div>
-      <form className="grid grid-cols-2 gap-5">
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
         <div className="flex flex-col gap-2">
           <label htmlFor="fullName">
             <Text>
@@ -12,6 +51,7 @@ const AddMember = () => {
             </Text>
           </label>
           <input
+            required
             type="text"
             name="fullName"
             id="fullName"
@@ -25,6 +65,7 @@ const AddMember = () => {
             </Text>
           </label>
           <input
+            required
             type="date"
             name="birthDate"
             id="birthDate"
@@ -38,6 +79,7 @@ const AddMember = () => {
             </Text>
           </label>
           <select
+            required
             name="groupNumber"
             id="groupNumber"
             className="p-3 border border-black/30 rounded"
@@ -57,6 +99,7 @@ const AddMember = () => {
             </Text>
           </label>
           <input
+            required
             type="text"
             name="address"
             id="address"
@@ -70,6 +113,7 @@ const AddMember = () => {
             </Text>
           </label>
           <input
+            required
             type="text"
             name="passportSeries"
             id="passportSeries"
@@ -84,6 +128,7 @@ const AddMember = () => {
             </Text>
           </label>
           <input
+            required
             type="text"
             name="passportNumber"
             id="passportNumber"
@@ -98,9 +143,11 @@ const AddMember = () => {
             </Text>
           </label>
           <input
+            required
             type="text"
             name="phoneNumber"
             id="phoneNumber"
+            defaultValue={"+998 "}
             className="p-3 border border-black/30 rounded"
             placeholder="+998 90 123 45 67"
           />
@@ -112,6 +159,7 @@ const AddMember = () => {
             </Text>
           </label>
           <select
+            required
             name="state"
             id="state"
             className="p-3 border border-black/30 rounded"
