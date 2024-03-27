@@ -1,17 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, H1, Text, Translated } from "../../components";
+import { Button, Empty, H1, Loading, Text, Translated } from "../../components";
 import DeleteProblems from "./DeleteProblems";
 import EditProblems from "./EditProblems";
 
 const index = () => {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   async function getData() {
     try {
       const response = await axios.get("problems");
       setData(response.data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -30,7 +32,7 @@ const index = () => {
         <Link to={"/add-problem"}>
           <Button className="bg-blue-500 text-white">
             <Text>
-              <Translated>+ Muammo qo'shish</Translated>
+              <Translated>+ Muammo haqida ma'lumot berish</Translated>
             </Text>
           </Button>
         </Link>
@@ -41,10 +43,14 @@ const index = () => {
             <tr className="border">
               <th className="border p-2">#</th>
               <th className="border p-2">
-                <Text>Nomi</Text>
+                <Text>
+                  <Translated>Muammo mavzusi</Translated>
+                </Text>
               </th>
               <th className="border p-2">
-                <Text>Fayl Nomi</Text>
+                <Text>
+                  <Translated>Muammo haqida</Translated>
+                </Text>
               </th>
               <th className="border p-2">
                 <Text>Action</Text>
@@ -52,25 +58,28 @@ const index = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.length > 0 ? (
-              data.map((item, index) => (
-                <tr key={index} className="border">
-                  <th className="border">{index + 1}</th>
-                  <td className="border">{item.name}</td>
-                  <td className="border">{item.fileName}</td>
-                  <td className="border">
-                    <DeleteProblems item={item} getData={getData} />
-                    <EditProblems item={item} getData={getData} />
-                  </td>
-                </tr>
-              ))
-            ) : (
+            {data?.map?.((item, index) => (
+              <tr key={index} className="border">
+                <th className="border">{index + 1}</th>
+                <td className="border">{item.name}</td>
+                <td className="border">{item.fileName}</td>
+                <td className="border">
+                  <DeleteProblems item={item} getData={getData} />
+                  <EditProblems item={item} getData={getData} />
+                </td>
+              </tr>
+            ))}
+            {loading && (
               <tr>
-                <td colSpan="4" className="text-center">
-                  <div className="flex flex-col items-center gap-3">
-                    <img src="/empty.png" alt="no data" width={100} />
-                    <p className="text-gray-500">No data available.</p>
-                  </div>
+                <td colSpan={8}>
+                  <Loading />
+                </td>
+              </tr>
+            )}
+            {data?.length === 0 && (
+              <tr>
+                <td colSpan={8}>
+                  <Empty />
                 </td>
               </tr>
             )}

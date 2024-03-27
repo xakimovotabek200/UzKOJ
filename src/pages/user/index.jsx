@@ -1,16 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { H1, Text, Translated } from "../../components";
+import { Link } from "react-router-dom";
+import { Button, Empty, H1, Loading, Text, Translated } from "../../components";
 import DeleteUser from "./DeleteUser";
-import PostUser from "./PostUser";
 
 const Index = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function getData() {
     try {
       const response = await axios.get("users");
       setData(response.data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -26,7 +28,13 @@ const Index = () => {
         <H1>
           <Translated>Tuman adminlari</Translated>
         </H1>
-        <PostUser getData={getData} />
+        <Link to={"/add-admin"}>
+          <Button className="text-white bg-blue-500">
+            <Text>
+              <Translated>+ A'zo qo'shish</Translated>
+            </Text>
+          </Button>
+        </Link>
       </div>
       <div className="overflow-x-auto mt-5">
         <table className="table w-full bg-white text-center border">
@@ -34,10 +42,14 @@ const Index = () => {
             <tr className="border">
               <th className="border p-2"></th>
               <th className="border p-2">
-                <Text>User Name</Text>
+                <Text>
+                  <Translated>Admin Ismi</Translated>
+                </Text>
               </th>
               <th className="border p-2">
-                <Text>Region</Text>
+                <Text>
+                  <Translated>Tuman</Translated>
+                </Text>
               </th>
               <th className="border p-2">
                 <Text>Action</Text>
@@ -45,24 +57,27 @@ const Index = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.length > 0 ? (
-              data.map((item, index) => (
-                <tr key={index} className="border">
-                  <th className="border">{index + 1}</th>
-                  <td className="border">{item.username}</td>
-                  <td className="border">{item.region}</td>
-                  <td className="border">
-                    <DeleteUser item={item} getData={getData} />
-                  </td>
-                </tr>
-              ))
-            ) : (
+            {data?.map?.((item, index) => (
+              <tr key={index} className="border">
+                <th className="border">{index + 1}</th>
+                <td className="border">{item.username}</td>
+                <td className="border">{item.region}</td>
+                <td className="border">
+                  <DeleteUser item={item} getData={getData} />
+                </td>
+              </tr>
+            ))}{" "}
+            {loading && (
               <tr>
-                <td colSpan="4" className="text-center">
-                  <div className="flex flex-col items-center gap-3">
-                    <img src="/empty.png" alt="no data" width={100} />
-                    <p className="text-gray-500">No data available.</p>
-                  </div>
+                <td colSpan={8}>
+                  <Loading />
+                </td>
+              </tr>
+            )}
+            {data?.length === 0 && (
+              <tr>
+                <td colSpan={8}>
+                  <Empty />
                 </td>
               </tr>
             )}

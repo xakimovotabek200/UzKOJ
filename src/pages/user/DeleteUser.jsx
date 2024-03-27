@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Button, Dialog } from "../../components";
+import { useState } from "react";
+import { Button, Dialog, P, Translated } from "../../components";
 import { toast } from "react-toastify";
 
 const DeleteUser = ({ item, getData }) => {
@@ -8,10 +8,10 @@ const DeleteUser = ({ item, getData }) => {
 
   async function handleDelete() {
     try {
-      const res = await axios.delete(`/users/${item.id}`);
+      const res = await axios.delete(`/user/${item.id}`);
       if (res.status === 204) {
-        setSuccess(true);
         getData();
+        setSuccess(true);
         toast.info("O'chirildi!");
       }
     } catch (error) {
@@ -25,10 +25,27 @@ const DeleteUser = ({ item, getData }) => {
 
   return (
     <div>
-      <Button
-        onClick={confirm}
-        className="fa-solid fa-trash text-xl border-none bg-red-500 text-white"
-      />
+      <Dialog
+        title="Ogohlantirish"
+        btntitle={<span className="fa-solid fa-trash text-xl" />}
+        btnClasses={"bg-red-500"}
+        success={success}
+      >
+        <P className="text-red-500">
+          <Translated>O'chirish</Translated>!
+        </P>
+        <div className="grid grid-cols-2 gap-4 mt-5">
+          <Button
+            onClick={() => setSuccess(() => !success)}
+            className="bg-gray-500 text-white"
+          >
+            <Translated>Bekor qilish</Translated>
+          </Button>
+          <Button onClick={confirm} className="bg-red-500 text-white">
+            <Translated>O'chirish</Translated>
+          </Button>
+        </div>
+      </Dialog>
     </div>
   );
 };

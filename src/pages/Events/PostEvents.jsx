@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Button, Dialog, Text, Translated } from "../../components";
+import { useNavigate } from "react-router-dom";
 
 const Index = ({ getData }) => {
-  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
   const [file, setFile] = useState();
   const [formData, setFormData] = useState({
     name: "",
@@ -42,9 +43,9 @@ const Index = ({ getData }) => {
       formdataForSubmit.append("photo", formData.photo);
       formdataForSubmit.append("status", formData.status);
       const response = await axios.post("/events", formdataForSubmit);
+      e.target.reset();
       toast.success("Tadbir qo'shildi");
-      setSuccess(true);
-      getData();
+      navigate("/events");
     } catch (error) {
       toast.error("Error");
     }

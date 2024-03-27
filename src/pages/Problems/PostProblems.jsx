@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Button, Dialog, Text, Translated } from "../../components";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const PostProblems = ({ getData }) => {
-  const [success, setSuccess] = useState(false);
+const PostProblems = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     fileName: "",
@@ -23,9 +24,9 @@ const PostProblems = ({ getData }) => {
     try {
       const response = await axios.post("problems", formData);
       if (response.status === 201) {
-        toast.success("Problems post successful");
-        setSuccess(true);
-        getData();
+        e.target.reset();
+        toast.success("Muvaffaqiyatli qo'shildi!");
+        navigate("/problems");
       }
     } catch (error) {
       toast.error("Error submitting material post:");
@@ -38,7 +39,7 @@ const PostProblems = ({ getData }) => {
         <label class="label">
           <span class="text-base label-text">
             <Text>
-              <Translated>Nomi:</Translated>
+              <Translated>Muammo mavzusi:</Translated>
             </Text>
           </span>
         </label>
@@ -55,7 +56,7 @@ const PostProblems = ({ getData }) => {
         <label class="label">
           <span class="text-base mt-5 label-text">
             <Text>
-              <Translated>Fayl Nomi:</Translated>
+              <Translated>Muammo haqida:</Translated>
             </Text>
           </span>
         </label>

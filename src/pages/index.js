@@ -9,6 +9,7 @@ import Stats from "./Stats";
 import User from "./User";
 import AddEvent from "./Events/PostEvents";
 import AddProblem from "./Problems/PostProblems";
+import AddAdmin from "./User/PostUser";
 
 export {
   Documents,
@@ -22,4 +23,5 @@ export {
   AddRegisteredUser,
   AddEvent,
   AddProblem,
+  AddAdmin,
 };
