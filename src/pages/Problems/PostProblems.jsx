@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dialog } from "../../components";
+import { Button, Dialog, Text, Translated } from "../../components";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -33,45 +33,49 @@ const PostProblems = ({ getData }) => {
   };
 
   return (
-    <div>
-      {" "}
-      <Dialog title="salom" btntitle="+ Muammo qo'shish" success={success}>
-        <form onSubmit={handleSubmit}>
-          <div className="modal-box w-[750px]">
-            <div>
-              <label class="label">
-                <span class="text-base label-text">User Name</span>
-              </label>
-              <input
-                type="name"
-                onChange={handleInputChange}
-                placeholder="enter name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                required
-                name="name"
-              />
-            </div>
-            <div>
-              <label class="label">
-                <span class="text-base label-text">fileName</span>
-              </label>
-              <textarea
-                type="fileName"
-                onChange={handleInputChange}
-                placeholder="enter fileName"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                required
-                name="fileName"
-              />
-            </div>
-
-            <button className="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-5 mb-2 w-full ">
-              Submit
-            </button>
-          </div>
-        </form>
-      </Dialog>
-    </div>
+    <form onSubmit={handleSubmit} className="w-1/2">
+      <div>
+        <label class="label">
+          <span class="text-base label-text">
+            <Text>
+              <Translated>Nomi:</Translated>
+            </Text>
+          </span>
+        </label>
+        <input
+          type="name"
+          onChange={handleInputChange}
+          placeholder="enter name"
+          className="p-4 border border-black/30 rounded w-full"
+          required
+          name="name"
+        />
+      </div>
+      <div className="mt-5">
+        <label class="label">
+          <span class="text-base mt-5 label-text">
+            <Text>
+              <Translated>Fayl Nomi:</Translated>
+            </Text>
+          </span>
+        </label>
+        <textarea
+          type="fileName"
+          rows="4"
+          cols="50"
+          onChange={handleInputChange}
+          placeholder="enter fileName"
+          className="p-3 border border-black/30 rounded w-full "
+          required
+          name="fileName"
+        />
+      </div>
+      <Button className="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 mt-5 mb-2 w-full ">
+        <Text>
+          <Translated>Saqlash</Translated>
+        </Text>
+      </Button>
+    </form>
   );
 };
 

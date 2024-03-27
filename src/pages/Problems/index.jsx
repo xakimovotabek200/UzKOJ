@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Button, Text, Translated, H1 } from "../../components";
 import axios from "axios";
-import PostProblems from "./PostProblems";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, H1, Text, Translated } from "../../components";
 import DeleteProblems from "./DeleteProblems";
 import EditProblems from "./EditProblems";
 
@@ -27,7 +27,13 @@ const index = () => {
         <H1>
           <Translated>Muammolar</Translated>
         </H1>
-        <PostProblems getData={getData} />
+        <Link to={"/add-problem"}>
+          <Button className="bg-blue-500 text-white">
+            <Text>
+              <Translated>+ Muammo qo'shish</Translated>
+            </Text>
+          </Button>
+        </Link>
       </div>
       <div className="overflow-x-auto mt-5">
         <table className="table w-full bg-white text-center border">
@@ -35,10 +41,10 @@ const index = () => {
             <tr className="border">
               <th className="border p-2">#</th>
               <th className="border p-2">
-                <Text>Name</Text>
+                <Text>Nomi</Text>
               </th>
               <th className="border p-2">
-                <Text>fileName</Text>
+                <Text>Fayl Nomi</Text>
               </th>
               <th className="border p-2">
                 <Text>Action</Text>

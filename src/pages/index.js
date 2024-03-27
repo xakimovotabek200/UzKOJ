@@ -8,6 +8,7 @@ import AddRegisteredUser from "./Registered/AddRegisteredUser";
 import Stats from "./Stats";
 import User from "./User";
 import AddEvent from "./Events/PostEvents";
+import AddProblem from "./Problems/PostProblems";
 
 export {
   Documents,
@@ -20,4 +21,5 @@ export {
   Stats,
   AddRegisteredUser,
   AddEvent,
+  AddProblem,
 };

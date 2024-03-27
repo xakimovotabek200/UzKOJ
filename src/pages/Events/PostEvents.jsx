@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Button, Dialog, Translated } from "../../components";
+import { Button, Dialog, Text, Translated } from "../../components";
 
 const Index = ({ getData }) => {
   const [success, setSuccess] = useState(false);
@@ -58,7 +58,9 @@ const Index = ({ getData }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="name"
           >
-            Name
+            <Text>
+              <Translated>Tadbir nomi</Translated>
+            </Text>
           </label>
           <input
             type="text"
@@ -67,7 +69,7 @@ const Index = ({ getData }) => {
             placeholder="Tadbir nomini kriting..."
             value={formData.name}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="p-3 border border-black/30 rounded w-full"
             required
           />
         </div>
@@ -76,7 +78,9 @@ const Index = ({ getData }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="type"
           >
-            Type
+            <Text>
+              <Translated>Tadbir Turi</Translated>
+            </Text>
           </label>
           <input
             type="text"
@@ -85,7 +89,7 @@ const Index = ({ getData }) => {
             placeholder="Tadbir turini kriting..."
             value={formData.type}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="p-3 border border-black/30 rounded w-full"
             required
           />
         </div>
@@ -94,7 +98,9 @@ const Index = ({ getData }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="attendeeCount"
           >
-            Attendee Count
+            <Text>
+              <Translated>Tadbir ishtirokchilar sonini kirting</Translated>
+            </Text>
           </label>
           <input
             type="number"
@@ -103,7 +109,7 @@ const Index = ({ getData }) => {
             placeholder="Tadbir ishtirokchilar sonini kirting"
             value={formData.attendeeCount}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="p-3 border border-black/30 rounded w-full"
             required
           />
         </div>
@@ -112,7 +118,9 @@ const Index = ({ getData }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="comment"
           >
-            Comment
+            <Text>
+              <Translated>Izoh</Translated>
+            </Text>
           </label>
           <textarea
             id="comment"
@@ -120,7 +128,7 @@ const Index = ({ getData }) => {
             placeholder="Tadbir xaqida izoh yozing"
             value={formData.comment}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="p-3 border border-black/30 rounded w-full"
             required
           ></textarea>
         </div>
@@ -129,7 +137,9 @@ const Index = ({ getData }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="photo"
           >
-            photo
+            <Text>
+              <Translated>Foto</Translated>
+            </Text>
           </label>
           <input
             type="file"
@@ -137,29 +147,12 @@ const Index = ({ getData }) => {
             name="photo"
             placeholder="Tadbirdan suratlar"
             onChange={handleFileChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="p-3 border border-black/30 rounded w-full"
             required
           />
           {file && <img src={file} className="w-[400px]" alt="File Preview" />}
         </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="status"
-          >
-            Status
-          </label>
-          <input
-            type="text"
-            id="status"
-            placeholder="Tadbir xolatini yozing"
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
+
         <div className="col-span-2">
           <Button className="w-full bg-blue-500 text-white">
             <Translated>Saqlash</Translated>
