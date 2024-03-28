@@ -41,12 +41,59 @@ const AddMember = () => {
     }
   }
 
+  async function handleSubmitExcel(e) {
+    e.preventDefault();
+    const file = e.target.files[0];
+    const data = new FormData();
+    data.append("file", file);
+
+    const res = await axios.post("/members/upload", data);
+
+    if (res.status === 200) {
+      toast.success("Muvaffaqiyatli qo'shildi!");
+      navigate("/members");
+    } else {
+      toast.error("Nimadadir xatolik ketdi! Qayta uruning.");
+    }
+  }
+
   return (
     <div>
+      <div className="mb-10 flex items-center gap-5">
+        <div className="relative">
+          <Button className="bg-blue-500 text-white whitespace-nowrap">
+            <label htmlFor="excel_upload" className="cursor-pointer">
+              <Translated>Excel orqali yuklash</Translated>
+            </label>
+          </Button>
+          <input
+            type="file"
+            name="excel_upload"
+            id="excel_upload"
+            className="w-1 absolute left-2 top-1 -z-10"
+            accept=".xlsx, .xls"
+            onChange={handleSubmitExcel}
+          />
+        </div>
+        <div className="flex items-center gap-3 bg-white">
+          <Translated>
+            Ro'yxatga yangi a'zolarni Excel fayl orqali qo'shishda maxsus Excel
+            fayldan foydalaning.
+          </Translated>
+          <a
+            download
+            href={"/Royxat.xlsx"}
+            className="text-blue-500 hover:text-blue-700"
+          >
+            <span className="fa-solid fa-download mr-1" />
+            <Translated>Fayl</Translated>
+          </a>
+        </div>
+      </div>
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
         <div className="flex flex-col gap-2">
           <label htmlFor="fullName">
-            <Text>
+            <Text className="bg-white/30">
               <Translated>F.I.Sh</Translated>
             </Text>
           </label>
@@ -60,7 +107,7 @@ const AddMember = () => {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="birthDate">
-            <Text>
+            <Text className="bg-white/30">
               <Translated>Tug'ilgan sana</Translated>
             </Text>
           </label>
@@ -74,7 +121,7 @@ const AddMember = () => {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="groupNumber">
-            <Text>
+            <Text className="bg-white/30">
               <Translated>Nogironlik guruhi</Translated>
             </Text>
           </label>
@@ -94,7 +141,7 @@ const AddMember = () => {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="address">
-            <Text>
+            <Text className="bg-white/30">
               <Translated>Yashash manzili</Translated>
             </Text>
           </label>
@@ -108,7 +155,7 @@ const AddMember = () => {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="passportSeries">
-            <Text>
+            <Text className="bg-white/30">
               <Translated>Passport yoki ID karta seriyasi</Translated>
             </Text>
           </label>
@@ -123,7 +170,7 @@ const AddMember = () => {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="passportNumber">
-            <Text>
+            <Text className="bg-white/30">
               <Translated>Passport yoki ID karta raqami</Translated>
             </Text>
           </label>
@@ -138,7 +185,7 @@ const AddMember = () => {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="phoneNumber">
-            <Text>
+            <Text className="bg-white/30">
               <Translated>Telefon raqami</Translated>
             </Text>
           </label>
@@ -154,7 +201,7 @@ const AddMember = () => {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="state">
-            <Text>
+            <Text className="bg-white/30">
               <Translated>Oilaviy holati</Translated>
             </Text>
           </label>
