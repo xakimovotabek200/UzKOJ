@@ -70,7 +70,9 @@ const index = () => {
                 </Text>
               </th>
               <th className="border p-2">
-                <Text>Action</Text>
+                <Text>
+                  <span className="fa-solid fa-info-circle" />
+                </Text>
               </th>
             </tr>
           </thead>

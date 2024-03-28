@@ -5,7 +5,7 @@ import { Button, Empty, H1, Loading, Text, Translated } from "../../components";
 import DeleteUser from "./DeleteUser";
 
 const Index = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   async function getData() {
@@ -52,7 +52,9 @@ const Index = () => {
                 </Text>
               </th>
               <th className="border p-2">
-                <Text>Action</Text>
+                <Text>
+                  <span className="fa-solid fa-info-circle" />
+                </Text>
               </th>
             </tr>
           </thead>
