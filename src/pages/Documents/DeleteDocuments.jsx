@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Dialog, P, Translated } from "../../components";
 import { toast } from "react-toastify";
 
-const DeleteUser = ({ item, getData }) => {
+const DeleteDocuments = ({ item, getData }) => {
   const [success, setSuccess] = useState(false);
 
   async function handleDelete() {
@@ -50,4 +50,4 @@ const DeleteUser = ({ item, getData }) => {
   );
 };
 
-export default DeleteUser;
+export default DeleteDocuments;

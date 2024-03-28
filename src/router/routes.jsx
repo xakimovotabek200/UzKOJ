@@ -13,6 +13,7 @@ import {
   AddEvent,
   AddProblem,
   AddAdmin,
+  AddDocument,
 } from "../pages";
 import Home from "../components/Home";
 
@@ -103,5 +104,10 @@ export const hiddenRoutes = [
     key: 104,
     path: "/add-admin",
     element: token ? <AddAdmin /> : <Login />,
+  },
+  {
+    key: 105,
+    path: "/add-documents",
+    element: token ? <AddDocument /> : <Login />,
   },
 ];
