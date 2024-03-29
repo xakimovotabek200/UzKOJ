@@ -5,6 +5,7 @@ import Members from "./Members";
 import Problems from "./Problems";
 import AddAdmin from "./User/PostUser";
 import AddEvent from "./Events/PostEvents";
+import EditEvent from "./Events/EditEvent";
 import FullEvent from "./Events/FullEvent";
 import Documents from "./Documents";
 import Registered from "./Registered";
@@ -32,4 +33,5 @@ export {
   EditMember,
   EditRegisteredUser,
   FullEvent,
+  EditEvent,
 };
