@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import PostEvents from "./PostEvents";
 import axios from "axios";
-import { toast } from "react-toastify";
-import { H1, Translated, Text, Button } from "../../components";
-import DeleteEvents from "./DeleteEvents";
+import { H1, Translated, Text, Button, Loading, Empty } from "../../components";
 import { Link } from "react-router-dom";
 
 const index = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   async function getData() {
     try {
       const response = await axios.get("events");
       setData(response.data);
+      setLoading(false);
     } catch (error) {
-      toast.error("Error fetching data:", error);
+      return;
     }
   }
 
@@ -60,44 +59,38 @@ const index = () => {
                 </Text>
               </th>
               <th className="border p-2">
-                <Text>
-                  <Translated>Rasmlar</Translated>
-                </Text>
-              </th>
-              <th className="border p-2">
-                <Text>
-                  <Translated>Holati</Translated>{" "}
-                </Text>
-              </th>
-              <th className="border p-2">
-                <Text>
-                  <span
-                    className="fa-solid fa-info-circle"
-                    style={{ strokeDashoffset: "value" }}
-                  />
-                </Text>
+                <span className="fa-solid fa-info-circle" />
               </th>
             </tr>
           </thead>
           <tbody>
-            {data?.length > 0 ? (
-              data.map((item, index) => (
-                <tr key={index} className="border">
-                  <th className="border">{index + 1}</th>
-                  <td className="border">{item.name}</td>
-                  <td className="border">{item.fileName}</td>
-                  <td className="border">
-                    <DeleteEvents item={item} getData={getData} />
-                  </td>
-                </tr>
-              ))
-            ) : (
+            {data?.map((item, index) => (
+              <tr key={index} className="border">
+                <th className="border">{index + 1}</th>
+                <td className="border">{item?.name}</td>
+                <td className="border">{item?.type}</td>
+                <td className="border">{item?.attendeeCount}</td>
+                <td className="border">{item?.comment}</td>
+                <td className="border">
+                  <Link to={`/event/${item?.id}`} state={item}>
+                    <Button className="bg-blue-500 text-white">
+                      <Translated>To'liq ko'rish</Translated>
+                    </Button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+            {loading && (
               <tr>
-                <td colSpan="11" className="text-center">
-                  <div className="flex flex-col items-center gap-3">
-                    <img src="/empty.png" alt="no data" width={100} />
-                    <p className="text-gray-500">No data available.</p>
-                  </div>
+                <td colSpan={6}>
+                  <Loading />
+                </td>
+              </tr>
+            )}
+            {data?.length === 0 && (
+              <tr>
+                <td colSpan={6}>
+                  <Empty />
                 </td>
               </tr>
             )}
