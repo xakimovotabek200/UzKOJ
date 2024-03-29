@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Button, Dialog, Text, Translated } from "../../components";
+import { Button, Text, Translated } from "../../components";
 import { useNavigate } from "react-router-dom";
 
-const Index = ({ getData }) => {
+const index = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState();
   const [formData, setFormData] = useState({
@@ -35,19 +35,19 @@ const Index = ({ getData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formdataForSubmit = new FormData();
-      formdataForSubmit.append("name", formData.name);
-      formdataForSubmit.append("type", formData.type);
-      formdataForSubmit.append("attendeeCount", formData.attendeeCount);
-      formdataForSubmit.append("comment", formData.comment);
-      formdataForSubmit.append("photo", formData.photo);
-      formdataForSubmit.append("status", formData.status);
-      const response = await axios.post("/events", formdataForSubmit);
+      const form = new FormData();
+      form.append("file", formData.photo);
+      const image = await axios.post("images/upload", form);
+
+      formData.photo = image?.data?.split(
+        "Image uploaded successfully. Image URL: "
+      )[1];
+      await axios.post("/events", formData);
       e.target.reset();
       toast.success("Tadbir qo'shildi");
       navigate("/events");
     } catch (error) {
-      toast.error("Error");
+      toast.error("Nimadadir xatolik ketdi! Qayta uruning.");
     }
   };
 
@@ -147,7 +147,13 @@ const Index = ({ getData }) => {
             id="photo"
             name="photo"
             placeholder="Tadbirdan suratlar"
-            onChange={handleFileChange}
+            onChange={(e) => {
+              setFormData((prev) => ({
+                ...prev,
+                photo: e.target.files[0],
+              }));
+              handleFileChange(e);
+            }}
             className="p-3 border border-black/30 rounded w-full"
             required
           />
@@ -164,4 +170,4 @@ const Index = ({ getData }) => {
   );
 };
 
-export default Index;
+export default index;
