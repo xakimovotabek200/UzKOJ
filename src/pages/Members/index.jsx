@@ -114,7 +114,12 @@ const index = () => {
                 <td className="border p-1">
                   <Text>{item?.groupNumber}</Text>
                 </td>
-                <td className="border p-1">
+                <td className="border p-1 flex flex-col gap-1">
+                  <Link to={`/edit-member/${item?.id}`} state={item}>
+                    <Button>
+                      <span className="fa-solid fa-edit text-blue-500" />
+                    </Button>
+                  </Link>
                   <DeleteMember item={item} getData={getData} />
                 </td>
               </tr>

@@ -11,6 +11,8 @@ import AddMember from "./Members/AddMember";
 import AddProblem from "./Problems/PostProblems";
 import AddDocument from "./Documents/AddDocuments";
 import AddRegisteredUser from "./Registered/AddRegisteredUser";
+import EditMember from "./Members/EditMember";
+import EditRegisteredUser from "./Registered/EditRegisteredUser";
 
 export {
   Documents,
@@ -26,4 +28,6 @@ export {
   AddProblem,
   AddAdmin,
   AddDocument,
+  EditMember,
+  EditRegisteredUser,
 };
