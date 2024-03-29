@@ -14,6 +14,8 @@ import {
   AddProblem,
   AddAdmin,
   AddDocument,
+  EditMember,
+  EditRegisteredUser,
 } from "../pages";
 import Home from "../components/Home";
 
@@ -109,5 +111,15 @@ export const hiddenRoutes = [
     key: 105,
     path: "/add-documents",
     element: token ? <AddDocument /> : <Login />,
+  },
+  {
+    key: 106,
+    path: "/edit-user/:id",
+    element: token ? <EditRegisteredUser /> : <Login />,
+  },
+  {
+    key: 107,
+    path: "/edit-member/:id",
+    element: token ? <EditMember /> : <Login />,
   },
 ];

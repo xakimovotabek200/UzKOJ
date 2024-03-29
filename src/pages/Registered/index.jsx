@@ -115,6 +115,11 @@ const index = () => {
                   <Text>{item?.groupNumber}</Text>
                 </td>
                 <td className="border p-1">
+                  <Link to={`/edit-user/${item?.id}`} state={item}>
+                    <Button>
+                      <span className="fa-solid fa-edit text-blue-500" />
+                    </Button>
+                  </Link>
                   <DeleteRegisteredUser item={item} getData={getData} />
                 </td>
               </tr>
