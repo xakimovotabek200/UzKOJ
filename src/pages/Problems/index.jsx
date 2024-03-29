@@ -7,7 +7,7 @@ import EditProblems from "./EditProblems";
 
 const index = () => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   async function getData() {
     try {
@@ -32,7 +32,7 @@ const index = () => {
         <Link to={"/add-problem"}>
           <Button className="bg-blue-500 text-white">
             <Text>
-              <Translated>+ Muammo haqida ma'lumot berish</Translated>
+              <Translated>+ Muammo qo'shish</Translated>
             </Text>
           </Button>
         </Link>
@@ -53,9 +53,7 @@ const index = () => {
                 </Text>
               </th>
               <th className="border p-2">
-                <Text>
-                  <span className="fa-solid fa-info-circle" />
-                </Text>
+                <span className="fa-solid fa-info-circle" />
               </th>
             </tr>
           </thead>
@@ -73,14 +71,14 @@ const index = () => {
             ))}
             {loading && (
               <tr>
-                <td colSpan={8}>
+                <td colSpan={4}>
                   <Loading />
                 </td>
               </tr>
             )}
             {data?.length === 0 && (
               <tr>
-                <td colSpan={8}>
+                <td colSpan={4}>
                   <Empty />
                 </td>
               </tr>
