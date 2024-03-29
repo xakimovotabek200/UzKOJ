@@ -1,18 +1,20 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { Button, Dialog, P } from "../../components";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Button, Dialog, P, Text, Translated } from "../../components";
 
-const DeleteProblems = ({ item, getData }) => {
+const DeleteProblems = ({ id }) => {
+  const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
 
   async function handleDelete() {
     try {
-      const res = await axios.delete(`/events/${item.id}`);
+      const res = await axios.delete(`/events/${id}`);
       if (res.status === 204) {
-        getData();
         setSuccess(true);
         toast.info("O'chirildi!");
+        navigate("/events");
       }
     } catch (error) {
       toast.error("Nimadadir xatolik ketdi!");
@@ -27,21 +29,24 @@ const DeleteProblems = ({ item, getData }) => {
     <div>
       <Dialog
         title="Ogohlantirish !!!"
-        btntitle={
-          <Button className="fa-solid fa-trash text-xl border-none bg-red-500 text-white" />
-        }
+        btntitle={<span className="fa-solid fa-trash" />}
+        btnClasses={"bg-red-500"}
         success={success}
       >
-        <P>
-          <span className="fa-solid fa-exclamation-triangle text-red-500" />
-          <span className="text-red-500"> O'chirilishga kerak!</span>
-          <p>siz buni o'chirishga rozi bolasz mi?</p>
+        <P className="text-red-500 text-center">
+          <Translated>O'chirish</Translated>!
         </P>
-
-        <Button
-          onClick={confirm}
-          className="fa-solid fa-trash text-xl border-none bg-red-500 text-white"
-        />
+        <div className="grid grid-cols-2 gap-4 mt-5">
+          <Button
+            onClick={() => setSuccess(() => !success)}
+            className="bg-gray-500 text-white"
+          >
+            <Translated>Bekor qilish</Translated>
+          </Button>
+          <Button onClick={confirm} className="bg-red-500 text-white">
+            <Translated>O'chirish</Translated>
+          </Button>
+        </div>
       </Dialog>
     </div>
   );
