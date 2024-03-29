@@ -10,7 +10,7 @@ const Index = () => {
 
   async function getData() {
     try {
-      const response = await axios.get("documents");
+      const response = await axios.get("/materials");
       setData(response.data);
       setLoading(false);
     } catch (error) {
@@ -53,7 +53,10 @@ const Index = () => {
               </th>
               <th className="border p-2">
                 <Text>
-                  <span className="fa-solid fa-info-circle" />
+                  <span
+                    className="fa-solid fa-info-circle"
+                    style={{ strokeDashoffset: "value" }}
+                  />
                 </Text>
               </th>
             </tr>

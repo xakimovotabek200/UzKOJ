@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Empty, H1, Loading, Text, Translated } from "../../components";
 import DeleteProblems from "./DeleteProblems";
-import EditProblems from "./EditProblems";
 
-const index = () => {
+const Index = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -54,7 +53,10 @@ const index = () => {
               </th>
               <th className="border p-2">
                 <Text>
-                  <span className="fa-solid fa-info-circle" />
+                  <span
+                    className="fa-solid fa-info-circle"
+                    style={{ strokeDashoffset: "value" }}
+                  />
                 </Text>
               </th>
             </tr>
@@ -67,7 +69,6 @@ const index = () => {
                 <td className="border">{item.fileName}</td>
                 <td className="border">
                   <DeleteProblems item={item} getData={getData} />
-                  {/* <EditProblems item={item} getData={getData} /> */}
                 </td>
               </tr>
             ))}
@@ -92,4 +93,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

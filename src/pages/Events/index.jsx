@@ -71,7 +71,10 @@ const index = () => {
               </th>
               <th className="border p-2">
                 <Text>
-                  <span className="fa-solid fa-info-circle" />
+                  <span
+                    className="fa-solid fa-info-circle"
+                    style={{ strokeDashoffset: "value" }}
+                  />
                 </Text>
               </th>
             </tr>

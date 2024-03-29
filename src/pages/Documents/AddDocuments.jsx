@@ -7,8 +7,8 @@ import { Button, Text, Translated } from "../../components";
 const AddDocuments = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    fileName: "",
-    file: null,
+    name: "",
+    link: null,
   });
 
   const handleInputChange = (e) => {
@@ -20,23 +20,21 @@ const AddDocuments = () => {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        file: file,
-      }));
-    }
+    const link = e.target.files[0];
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      link: link,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append("fileName", formData.fileName);
-      formDataToSend.append("file", formData.file);
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("link", formData.link);
 
-      const response = await axios.post("documents", formDataToSend);
+      const response = await axios.post("materials", formDataToSend);
 
       if (response.status === 201) {
         e.target.reset();
@@ -62,9 +60,10 @@ const AddDocuments = () => {
           placeholder="Fayl nomini kiriting"
           className="p-3 border border-black/30 rounded w-full"
           required
-          name="fileName"
+          name="name"
         />
       </div>
+
       <div className="my-5">
         <label className="label">
           <Text className="text-base label-text">
