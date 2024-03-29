@@ -1,5 +1,5 @@
-import { useLocation, useParams } from "react-router-dom";
-import { P, Text, Translated } from "../../components";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { Button, P, Text, Translated } from "../../components";
 import { BASE_URL } from "../../constants";
 import DeleteEvents from "./DeleteEvents";
 
@@ -39,7 +39,15 @@ const FullEvent = () => {
           </Text>
           <Text>{state?.comment}</Text>
         </div>
-        <div className="grid grid-cols-3 mt-20">
+        <div className="grid grid-cols-3 gap-5 mt-20">
+          <div className="col-span-2">
+            <Link to={`/edit-event/${id}`} state={state}>
+              <Button className="bg-blue-500 text-white">
+                <span className="fa-solid fa-edit mr-2" />
+                <Translated>Tahrirlash</Translated>
+              </Button>
+            </Link>
+          </div>
           <DeleteEvents id={id} />
         </div>
       </div>
