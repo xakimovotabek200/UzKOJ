@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Text, Translated, H1, Empty, Loading } from "../../components";
+import { BASE_URL } from "../../constants";
 import DeleteMember from "./DeleteMember";
 
 const index = () => {
@@ -25,11 +26,18 @@ const index = () => {
         <H1>
           <Translated>UzKOJ a'zolari</Translated>
         </H1>
-        <Link to={"/register-member"}>
-          <Button className="bg-blue-500 text-white">
-            <Translated>+ A'zo qo'shish</Translated>
+        <div className="flex gap-3">
+          <Button>
+            <a href={BASE_URL + "/api/members/export"} download>
+              <Translated>A'zolarni yuklab olish</Translated>
+            </a>
           </Button>
-        </Link>
+          <Link to={"/register-member"}>
+            <Button className="bg-blue-500 text-white">
+              <Translated>+ A'zo qo'shish</Translated>
+            </Button>
+          </Link>
+        </div>
       </div>
       <div className="overflow-x-auto mt-5">
         <table className="table w-full bg-white text-center border">
@@ -109,7 +117,12 @@ const index = () => {
                 <td className="border p-1">
                   <Text>{item?.groupNumber}</Text>
                 </td>
-                <td className="border p-1">
+                <td className="border p-1 flex flex-col gap-1">
+                  <Link to={`/edit-member/${item?.id}`} state={item}>
+                    <Button>
+                      <span className="fa-solid fa-edit text-blue-500" />
+                    </Button>
+                  </Link>
                   <DeleteMember item={item} getData={getData} />
                 </td>
               </tr>

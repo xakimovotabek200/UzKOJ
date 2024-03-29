@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Text, Translated, H1, Empty, Loading } from "../../components";
+import { BASE_URL } from "../../constants";
 import DeleteRegisteredUser from "./DeleteRegisteredUser";
 
 const index = () => {
@@ -25,11 +26,18 @@ const index = () => {
         <H1>
           <Translated>Ro'yxatda turganlar</Translated>
         </H1>
-        <Link to={"/register-user"}>
-          <Button className="bg-blue-500 text-white">
-            <Translated>+ A'zo qo'shish</Translated>
+        <div className="flex gap-3">
+          <Button>
+            <a href={BASE_URL + "/api/clients/export"} download>
+              <Translated>Ro'yxatdagilarni yuklab olish</Translated>
+            </a>
           </Button>
-        </Link>
+          <Link to={"/register-user"}>
+            <Button className="bg-blue-500 text-white">
+              <Translated>+ A'zo qo'shish</Translated>
+            </Button>
+          </Link>
+        </div>
       </div>
       <div className="overflow-x-auto mt-5">
         <table className="table w-full bg-white text-center border">
@@ -110,6 +118,11 @@ const index = () => {
                   <Text>{item?.groupNumber}</Text>
                 </td>
                 <td className="border p-1">
+                  <Link to={`/edit-user/${item?.id}`} state={item}>
+                    <Button>
+                      <span className="fa-solid fa-edit text-blue-500" />
+                    </Button>
+                  </Link>
                   <DeleteRegisteredUser item={item} getData={getData} />
                 </td>
               </tr>

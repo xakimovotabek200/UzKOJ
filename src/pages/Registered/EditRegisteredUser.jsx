@@ -1,10 +1,23 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Text, Translated } from "../../components";
 
-const AddRegisteredUser = () => {
+const AddMember = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { state: member } = useLocation();
+  const date = member?.birthDate.includes(".")
+    ? member.birthDate.split(".").reverse().join("-")
+    : new Date(member?.birthDate).getFullYear() +
+      "-" +
+      (Number(new Date(member?.birthDate).getMonth()) + 1 < 10
+        ? "0" + (Number(new Date(member?.birthDate).getMonth()) + 1)
+        : Number(new Date(member?.birthDate).getMonth()) + 1) +
+      "-" +
+      (Number(new Date(member?.birthDate).getDate()) < 10
+        ? "" + Number(new Date(member?.birthDate).getDate())
+        : Number(new Date(member?.birthDate).getDate()));
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -20,37 +33,25 @@ const AddRegisteredUser = () => {
     } = e.target;
 
     const data = {
-      fullName: fullName.value,
-      birthDate: birthDate.value,
-      groupNumber: groupNumber.value,
-      address: address.value,
-      passportSeries: passportSeries.value,
-      passportNumber: passportNumber.value,
-      phoneNumber: phoneNumber.value,
-      state: state.value,
+      fullName: fullName.value ? fullName.value : member.fullName,
+      birthDate: birthDate.value ? birthDate.value : member.birthDate,
+      groupNumber: groupNumber.value ? groupNumber.value : member.groupNumber,
+      address: address.value ? address.value : member.address,
+      passportSeries: passportSeries.value
+        ? passportSeries.value
+        : member.passportSeries,
+      passportNumber: passportNumber.value
+        ? passportNumber.value
+        : member.passportNumber,
+      phoneNumber: phoneNumber.value ? phoneNumber.value : member.phoneNumber,
+      state: state.value ? state.value : member.state,
     };
 
-    const res = await axios.post("/clients", data);
-
-    if (res.status === 201) {
-      e.target.reset();
-      toast.success("Muvaffaqiyatli qo'shildi!");
-      navigate("/registered");
-    } else {
-      toast.error("Nimadadir xatolik ketdi! Qayta uruning.");
-    }
-  }
-
-  async function handleSubmitExcel(e) {
-    e.preventDefault();
-    const file = e.target.files[0];
-    const data = new FormData();
-    data.append("file", file);
-
-    const res = await axios.post("/clients/upload", data);
+    const res = await axios.patch(`/clients/${id}`, data);
 
     if (res.status === 200) {
-      toast.success("Muvaffaqiyatli qo'shildi!");
+      e.target.reset();
+      toast.success("Muvaffaqiyatli tahrirlandi!");
       navigate("/registered");
     } else {
       toast.error("Nimadadir xatolik ketdi! Qayta uruning.");
@@ -59,37 +60,6 @@ const AddRegisteredUser = () => {
 
   return (
     <div>
-      <div className="mb-10 flex items-center gap-5">
-        <div className="relative">
-          <Button className="bg-blue-500 text-white whitespace-nowrap">
-            <label htmlFor="excel_upload" className="cursor-pointer">
-              <Translated>Excel orqali yuklash</Translated>
-            </label>
-          </Button>
-          <input
-            type="file"
-            name="excel_upload"
-            id="excel_upload"
-            className="w-1 absolute left-2 top-1 -z-10"
-            accept=".xlsx, .xls"
-            onChange={handleSubmitExcel}
-          />
-        </div>
-        <div className="flex items-center gap-3 bg-white">
-          <Translated>
-            Ro'yxatga yangi a'zolarni Excel fayl orqali qo'shishda maxsus Excel
-            fayldan foydalaning.
-          </Translated>
-          <a
-            download
-            href={"/Royxat.xlsx"}
-            className="text-blue-500 hover:text-blue-700"
-          >
-            <span className="fa-solid fa-download mr-1" />
-            <Translated>Fayl</Translated>
-          </a>
-        </div>
-      </div>
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
         <div className="flex flex-col gap-2">
           <label htmlFor="fullName">
@@ -102,6 +72,7 @@ const AddRegisteredUser = () => {
             type="text"
             name="fullName"
             id="fullName"
+            defaultValue={member.fullName}
             className="p-3 border border-black/30 rounded"
           />
         </div>
@@ -116,6 +87,7 @@ const AddRegisteredUser = () => {
             type="date"
             name="birthDate"
             id="birthDate"
+            defaultValue={date}
             className="p-3 border border-black/30 rounded"
           />
         </div>
@@ -129,6 +101,7 @@ const AddRegisteredUser = () => {
             required
             name="groupNumber"
             id="groupNumber"
+            defaultValue={member?.groupNumber}
             className="p-3 border border-black/30 rounded"
           >
             <option value="0">
@@ -150,6 +123,7 @@ const AddRegisteredUser = () => {
             type="text"
             name="address"
             id="address"
+            defaultValue={member?.address}
             className="p-3 border border-black/30 rounded"
           />
         </div>
@@ -164,6 +138,7 @@ const AddRegisteredUser = () => {
             type="text"
             name="passportSeries"
             id="passportSeries"
+            defaultValue={member?.passportSeries}
             className="p-3 border border-black/30 rounded"
             placeholder="AA"
           />
@@ -179,6 +154,7 @@ const AddRegisteredUser = () => {
             type="text"
             name="passportNumber"
             id="passportNumber"
+            defaultValue={member?.passportNumber}
             className="p-3 border border-black/30 rounded"
             placeholder="1234657"
           />
@@ -194,7 +170,7 @@ const AddRegisteredUser = () => {
             type="text"
             name="phoneNumber"
             id="phoneNumber"
-            defaultValue={"+998 "}
+            defaultValue={member?.phoneNumber}
             className="p-3 border border-black/30 rounded"
             placeholder="+998 90 123 45 67"
           />
@@ -235,4 +211,4 @@ const AddRegisteredUser = () => {
   );
 };
 
-export default AddRegisteredUser;
+export default AddMember;
