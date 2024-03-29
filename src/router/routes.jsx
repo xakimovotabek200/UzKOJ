@@ -16,6 +16,7 @@ import {
   AddDocument,
   EditMember,
   EditRegisteredUser,
+  FullEvent,
 } from "../pages";
 import Home from "../components/Home";
 
@@ -121,5 +122,10 @@ export const hiddenRoutes = [
     key: 107,
     path: "/edit-member/:id",
     element: token ? <EditMember /> : <Login />,
+  },
+  {
+    key: 108,
+    path: "/event/:id",
+    element: token ? <FullEvent /> : <Login />,
   },
 ];
