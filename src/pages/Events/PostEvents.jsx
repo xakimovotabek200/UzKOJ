@@ -1,10 +1,10 @@
-import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
-import { Button, Dialog, Text, Translated } from "../../components";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Button, Text, Translated } from "../../components";
 
-const Index = ({ getData }) => {
+const Index = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState();
   const [formData, setFormData] = useState({
