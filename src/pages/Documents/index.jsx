@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Empty, H1, Loading, Text, Translated } from "../../components";
 import DeleteDocuments from "./DeleteDocuments";
+import { BASE_URL } from "../../constants";
 
 const Index = () => {
   const [data, setData] = useState(null);
@@ -65,8 +66,15 @@ const Index = () => {
             {data?.map?.((item, index) => (
               <tr key={index} className="border">
                 <th className="border">{index + 1}</th>
-                <td className="border">{item.fileName}</td>
-                <td className="border">{item.region}</td>
+                <td className="border">{item.name}</td>
+                <td className="border">
+                  <a
+                    href={BASE_URL + "/api/images/download/" + item.link}
+                    download
+                  >
+                    <span className="fa-solid fa-download cursor-pointer text-3xl text-blue-500" />
+                  </a>
+                </td>
                 <td className="border">
                   <DeleteDocuments item={item} getData={getData} />
                 </td>

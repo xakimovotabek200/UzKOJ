@@ -30,19 +30,19 @@ const AddDocuments = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("link", formData.link);
+      const form = new FormData();
+      form.append("file", formData.link);
+      const image = await axios.post("images/upload", form);
 
-      const response = await axios.post("materials", formDataToSend);
-
-      if (response.status === 201) {
-        e.target.reset();
-        toast.success("Xujjat muvaffaqiyatli qo'shildi");
-        navigate("/documents");
-      }
+      formData.link = image?.data?.split(
+        "Image uploaded successfully. Image URL: "
+      )[1];
+      await axios.post("/materials", formData);
+      e.target.reset();
+      toast.success("Xujjat qo'shildi");
+      navigate("/documents");
     } catch (error) {
-      toast.error("Nimadurda xatolik boldi");
+      toast.error("Nimadadir xatolik ketdi! Qayta uruning.");
     }
   };
 

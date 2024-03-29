@@ -8,7 +8,7 @@ const DeleteDocuments = ({ item, getData }) => {
 
   async function handleDelete() {
     try {
-      const res = await axios.delete(`/users/${item.id}`);
+      const res = await axios.delete(`/materials/${item.id}`);
       if (res.status === 204) {
         getData();
         setSuccess(true);
