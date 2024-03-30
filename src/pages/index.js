@@ -10,11 +10,12 @@ import FullEvent from "./Events/FullEvent";
 import Documents from "./Documents";
 import Registered from "./Registered";
 import AddMember from "./Members/AddMember";
+import EditMember from "./Members/EditMember";
 import AddProblem from "./Problems/PostProblems";
 import AddDocument from "./Documents/AddDocuments";
 import AddRegisteredUser from "./Registered/AddRegisteredUser";
-import EditMember from "./Members/EditMember";
 import EditRegisteredUser from "./Registered/EditRegisteredUser";
+import AddStats from "./Stats/AddStats";
 
 export {
   Documents,
@@ -34,4 +35,5 @@ export {
   EditRegisteredUser,
   FullEvent,
   EditEvent,
+  AddStats,
 };

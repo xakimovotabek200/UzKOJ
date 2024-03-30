@@ -18,6 +18,7 @@ import {
   EditRegisteredUser,
   FullEvent,
   EditEvent,
+  AddStats,
 } from "../pages";
 import Home from "../components/Home";
 
@@ -133,5 +134,10 @@ export const hiddenRoutes = [
     key: 109,
     path: "/edit-event/:id",
     element: token ? <EditEvent /> : <Login />,
+  },
+  {
+    key: 110,
+    path: "/add-stats",
+    element: token ? <AddStats /> : <Login />,
   },
 ];
