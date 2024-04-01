@@ -16,16 +16,17 @@ const Login = ({ setIsLoggedIn }) => {
       });
       if (response.data.access_token) {
         sessionStorage.setItem("token", response.data.access_token);
+        sessionStorage.setItem("user_id", response.data?.id);
         window.location.reload();
         setIsLoggedIn(true);
       } else {
-        toast.error("Authentication failed");
+        toast.error("Hisobga kirishda xato.");
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        toast.error("Invalid email or password");
+        toast.error("Mavjud bo'lmagan hisob.");
       } else {
-        toast.error("Error during authentication");
+        toast.error("Hisobga kirishda xato.");
       }
     } finally {
       setLoading(false);
@@ -70,7 +71,7 @@ const Login = ({ setIsLoggedIn }) => {
                 className="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-full focus:outline-none "
                 disabled={loading}
               >
-                {loading ? "Logging in..." : "Login"}
+                {loading ? "Kirilmoqda..." : "Kirish"}
               </button>
             </div>
           </form>
