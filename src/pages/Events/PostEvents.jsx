@@ -7,6 +7,7 @@ import { useState } from "react";
 const index = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState();
+  const user_id = sessionStorage.getItem("user_id");
   const [formData, setFormData] = useState({
     name: "",
     type: "",
@@ -14,6 +15,7 @@ const index = () => {
     comment: "",
     photo: "",
     status: "",
+    userId: user_id,
   });
 
   const handleChange = (e) => {

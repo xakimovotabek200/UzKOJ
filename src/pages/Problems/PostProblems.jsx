@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 const PostProblems = () => {
   const navigate = useNavigate();
+  const user_id = sessionStorage.getItem("user_id");
   const [formData, setFormData] = useState({
     name: "",
     fileName: "",
+    userId: user_id,
   });
 
   const handleInputChange = (e) => {
