@@ -116,7 +116,7 @@ const index = () => {
                 sessionStorage.clear();
                 window.location.reload();
               }}
-              className={`border rounded px-5 py-1 ml-8 bg-red-500`}
+              className="border rounded px-5 py-1 ml-8 bg-red-500"
               title="Hisobdan chiqish"
             >
               <Text className="flex items-center gap-1">
