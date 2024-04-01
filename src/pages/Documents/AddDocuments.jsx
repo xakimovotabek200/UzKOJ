@@ -9,6 +9,7 @@ const AddDocuments = () => {
   const [formData, setFormData] = useState({
     name: "",
     link: null,
+    userid: sessionStorage.getItem("user_id"),
   });
 
   const handleInputChange = (e) => {
@@ -29,9 +30,11 @@ const AddDocuments = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const file = e.target.file.files[0];
+
     try {
       const form = new FormData();
-      form.append("file", formData.link);
+      form.append("file", file);
       const image = await axios.post("images/upload", form);
 
       formData.link = image?.data?.split(
@@ -47,7 +50,7 @@ const AddDocuments = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-1/2">
+    <form onSubmit={handleSubmit} className="md:w-1/2">
       <div className="my-5">
         <label className="label">
           <Text className="text-base label-text">
@@ -72,10 +75,10 @@ const AddDocuments = () => {
         </label>
         <input
           type="file"
+          name="file"
           onChange={handleFileChange}
           className="p-3 border border-black/30 rounded w-full"
           required
-          accept=".doc,.docx,.xls,.xlsx"
         />
       </div>
 

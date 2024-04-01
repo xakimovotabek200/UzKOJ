@@ -111,6 +111,19 @@ const index = () => {
             >
               <Text>Крил</Text>
             </button>
+            <button
+              onClick={() => {
+                sessionStorage.clear();
+                window.location.reload();
+              }}
+              className={`border rounded px-5 py-1 ml-8 bg-red-500`}
+              title="Hisobdan chiqish"
+            >
+              <Text className="flex items-center gap-1">
+                <span className="fa-solid fa-right-from-bracket" />
+                <Translated>Chiqish</Translated>
+              </Text>
+            </button>
           </div>
         </div>
       </div>
