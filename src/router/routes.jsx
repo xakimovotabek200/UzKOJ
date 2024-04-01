@@ -19,6 +19,7 @@ import {
   FullEvent,
   EditEvent,
   AddStats,
+  FullStats,
 } from "../pages";
 import Home from "../components/Home";
 
@@ -139,5 +140,10 @@ export const hiddenRoutes = [
     key: 110,
     path: "/add-stats",
     element: token ? <AddStats /> : <Login />,
+  },
+  {
+    key: 111,
+    path: "/full-stats/:id",
+    element: token ? <FullStats /> : <Login />,
   },
 ];

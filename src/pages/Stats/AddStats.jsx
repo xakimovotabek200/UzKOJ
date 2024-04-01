@@ -6,10 +6,37 @@ import { Button, Text, Translated } from "../../components";
 
 const AddStats = () => {
   const navigate = useNavigate();
+  const user_id = sessionStorage.getItem("user_id");
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(e);
+    const { type, year, period, address, ktut, mhobt, xxtut, file } = e.target;
+    const data = {
+      type: type.value,
+      year: year.value,
+      period: period.value,
+      location: address.value,
+      link: null,
+      userId: user_id,
+      mhobt: mhobt.value,
+      xxtut: xxtut.value,
+      ktut: ktut.value,
+    };
+
+    try {
+      const form = new FormData();
+      form.append("file", file.files[0]);
+      const uploaded_file = await axios.post("images/upload", form);
+      data.link = uploaded_file?.data?.split(
+        "Image uploaded successfully. Image URL: "
+      )[1];
+      await axios.post("/statistics", data);
+      e.target.reset();
+      toast.success("Hisobot qo'shildi");
+      navigate("/stats");
+    } catch (error) {
+      toast.error("Nimadadir xatolik ketdi. Qayta uruning!");
+    }
   }
 
   return (

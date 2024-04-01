@@ -16,6 +16,7 @@ import AddDocument from "./Documents/AddDocuments";
 import AddRegisteredUser from "./Registered/AddRegisteredUser";
 import EditRegisteredUser from "./Registered/EditRegisteredUser";
 import AddStats from "./Stats/AddStats";
+import FullStats from "./Stats/FullStats";
 
 export {
   Documents,
@@ -36,4 +37,5 @@ export {
   FullEvent,
   EditEvent,
   AddStats,
+  FullStats,
 };

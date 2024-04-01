@@ -49,7 +49,7 @@ const Index = () => {
               </th>
               <th className="border p-2">
                 <Text>
-                  <Translated>Yuklash</Translated>
+                  <Translated>Yuklab olish</Translated>
                 </Text>
               </th>
               <th className="border p-2">
@@ -82,14 +82,14 @@ const Index = () => {
             ))}{" "}
             {loading && (
               <tr>
-                <td colSpan={8}>
+                <td colSpan={4}>
                   <Loading />
                 </td>
               </tr>
             )}
             {data?.length === 0 && (
               <tr>
-                <td colSpan={8}>
+                <td colSpan={4}>
                   <Empty />
                 </td>
               </tr>
