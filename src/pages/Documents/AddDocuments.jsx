@@ -9,7 +9,7 @@ const AddDocuments = () => {
   const [formData, setFormData] = useState({
     name: "",
     link: null,
-    userid: sessionStorage.getItem("user_id"),
+    userId: sessionStorage.getItem("user_id"),
   });
 
   const handleInputChange = (e) => {

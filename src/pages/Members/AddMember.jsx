@@ -5,6 +5,7 @@ import { Button, Text, Translated } from "../../components";
 
 const AddMember = () => {
   const navigate = useNavigate();
+  const user_id = sessionStorage.getItem("user_id");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,6 +29,7 @@ const AddMember = () => {
       passportNumber: passportNumber.value,
       phoneNumber: phoneNumber.value,
       state: state.value,
+      userId: user_id,
     };
 
     const res = await axios.post("/members", data);
