@@ -38,39 +38,40 @@ const PostUser = () => {
   return (
     <form onSubmit={handleSubmit} className="w-1/1 ">
       <div>
-        <label class="label">
-          <span class="text-base label-text">User Name</span>
+        <label className="label">
+          <Text>
+            <Translated>Foydalanuvchi nomi:</Translated>
+          </Text>
         </label>
         <input
           type="username"
           onChange={handleInputChange}
-          placeholder="enter username"
           className="p-3 border border-black/30 rounded w-full "
           required
           name="username"
         />
       </div>
-      <div>
-        <label class="label">
-          <span class="text-base label-text">Password</span>
+      <div className="mt-3">
+        <label className="label">
+          <Text>
+            <Translated>Parol:</Translated>
+          </Text>
         </label>
         <input
           type="password"
           onChange={handleInputChange}
-          placeholder="enter password"
           className="p-3 border border-black/30 rounded w-full "
           required
           name="password"
         />
       </div>
-      <div>
-        <label class="label">
-          <span class="text-base label-text">Region</span>
-        </label>
+      <div className="mt-3">
+        <Text>
+          <Translated>Tuman:</Translated>
+        </Text>
         <input
           type="text"
           onChange={handleInputChange}
-          placeholder="enter region"
           className="p-3 border border-black/30 rounded w-full "
           required
           name="region"
