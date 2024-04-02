@@ -54,11 +54,6 @@ const index = () => {
                 </Text>
               </th>
               <th className="border p-2">
-                <Text>
-                  <Translated>Izoh</Translated>
-                </Text>
-              </th>
-              <th className="border p-2">
                 <span className="fa-solid fa-info-circle" />
               </th>
             </tr>
@@ -70,7 +65,6 @@ const index = () => {
                 <td className="border">{item?.name}</td>
                 <td className="border">{item?.type}</td>
                 <td className="border">{item?.attendeeCount}</td>
-                <td className="border">{item?.comment}</td>
                 <td className="border">
                   <Link to={`/event/${item?.id}`} state={item}>
                     <Button className="bg-blue-500 text-white">
@@ -82,14 +76,14 @@ const index = () => {
             ))}
             {loading && (
               <tr>
-                <td colSpan={6}>
+                <td colSpan={5}>
                   <Loading />
                 </td>
               </tr>
             )}
             {data?.length === 0 && (
               <tr>
-                <td colSpan={6}>
+                <td colSpan={5}>
                   <Empty />
                 </td>
               </tr>
