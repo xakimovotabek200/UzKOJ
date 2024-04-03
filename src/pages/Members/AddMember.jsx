@@ -49,7 +49,10 @@ const AddMember = () => {
     const data = new FormData();
     data.append("file", file);
 
-    const res = await axios.post("/members/upload", data);
+    const res = await axios.post(
+      `/members/upload${user_id !== 1 ? `/${user_id}` : ""}`,
+      data
+    );
 
     if (res.status === 200) {
       toast.success("Muvaffaqiyatli qo'shildi!");
