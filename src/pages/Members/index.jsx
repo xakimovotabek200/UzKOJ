@@ -11,10 +11,11 @@ const index = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = sessionStorage.getItem("token");
+  const user_id = +sessionStorage.getItem("user_id");
 
   async function getData() {
     await axios
-      .get("/members")
+      .get(`/members${user_id !== 1 ? `/user/${user_id}` : ""}`)
       .then((res) => setData(res?.data))
       .finally(() => setLoading(false));
   }

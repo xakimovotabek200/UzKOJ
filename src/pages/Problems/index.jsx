@@ -7,10 +7,13 @@ import DeleteProblems from "./DeleteProblems";
 const Index = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
+  const user_id = +sessionStorage.getItem("user_id");
 
   async function getData() {
     try {
-      const response = await axios.get("problems");
+      const response = await axios.get(
+        `problems${user_id !== 1 ? `/user/${user_id}` : ""}`
+      );
       setData(response.data);
       setLoading(false);
     } catch (error) {

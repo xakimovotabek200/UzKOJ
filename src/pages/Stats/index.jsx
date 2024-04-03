@@ -20,10 +20,13 @@ const index = () => {
     year: "",
     period: "",
   });
+  const user_id = +sessionStorage.getItem("user_id");
 
   async function getData() {
     try {
-      const response = await axios.get("/statistics");
+      const response = await axios.get(
+        `/statistics${user_id !== 1 ? `/user/${user_id}` : ""}`
+      );
       setData(response.data);
       setLoading(false);
     } catch (error) {
