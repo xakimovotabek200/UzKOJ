@@ -27,7 +27,9 @@ const index = () => {
       setData(response.data);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      return;
+    } finally {
+      setLoading(false);
     }
   }
 

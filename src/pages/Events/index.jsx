@@ -14,6 +14,8 @@ const index = () => {
       setLoading(false);
     } catch (error) {
       return;
+    } finally {
+      setLoading(false);
     }
   }
 
