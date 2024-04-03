@@ -1,6 +1,8 @@
 import axios from "axios";
+import fileDownload from "js-file-download";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Button, Text, Translated, H1, Empty, Loading } from "../../components";
 import { BASE_URL } from "../../constants";
 import DeleteMember from "./DeleteMember";
@@ -8,6 +10,7 @@ import DeleteMember from "./DeleteMember";
 const index = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const token = sessionStorage.getItem("token");
 
   async function getData() {
     await axios
@@ -20,6 +23,23 @@ const index = () => {
     getData();
   }, []);
 
+  async function downloadExcel(url) {
+    axios({
+      method: "get",
+      url: url,
+      responseType: "blob",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        fileDownload(response.data, "Royxat.xlsx");
+      })
+      .catch((error) => {
+        toast.error("Ro'yxatni yuklab olishda xatolik");
+      });
+  }
+
   return (
     <div>
       <div className="w-full flex items-center justify-between gap-5">
@@ -27,10 +47,12 @@ const index = () => {
           <Translated>UzKOJ a'zolari</Translated>
         </H1>
         <div className="flex gap-3">
-          <Button>
-            <a href={BASE_URL + "/api/members/export"} download>
-              <Translated>A'zolarni yuklab olish</Translated>
-            </a>
+          <Button
+            onClick={() => downloadExcel(BASE_URL + "/api/members/export")}
+          >
+            {/* <a href={BASE_URL + "/api/members/export"} download> */}
+            <Translated>A'zolarni yuklab olish</Translated>
+            {/* </a> */}
           </Button>
           <Link to={"/register-member"}>
             <Button className="bg-blue-500 text-white">
