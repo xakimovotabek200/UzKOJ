@@ -8,7 +8,6 @@ import ExcelDataRenderer from "../../Excel";
 
 const FullStats = () => {
   const { state } = useLocation();
-  console.log(state);
 
   return (
     <div className="flex flex-col gap-7">
