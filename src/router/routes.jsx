@@ -24,6 +24,7 @@ import {
 import Home from "../components/Home";
 
 const token = sessionStorage.getItem("token");
+const user_id = +sessionStorage.getItem("user_id");
 
 export const routes = [
   {
@@ -32,6 +33,7 @@ export const routes = [
     title: "Bosh sahifa",
     icon: <span className="fa-solid fa-home" />,
     element: token ? <Home /> : <Login />,
+    hidden: false,
   },
   {
     key: 1,
@@ -39,6 +41,7 @@ export const routes = [
     title: "Kerakli hujjatlar",
     icon: <span className="fa-solid fa-file-lines" />,
     element: token ? <Documents /> : <Login />,
+    hidden: false,
   },
   {
     key: 5,
@@ -46,6 +49,7 @@ export const routes = [
     title: "Xisobda turganlar",
     icon: <span className="fa-solid fa-users" />,
     element: token ? <Registered /> : <Login />,
+    hidden: false,
   },
   {
     key: 3,
@@ -53,6 +57,7 @@ export const routes = [
     title: "O'zKOJ a'zolari",
     icon: <span className="fa-solid fa-address-card" />,
     element: token ? <Members /> : <Login />,
+    hidden: false,
   },
   {
     key: 2,
@@ -60,6 +65,7 @@ export const routes = [
     title: "Tadbirlar",
     icon: <span className="fa-solid fa-calendar-days" />,
     element: token ? <Events /> : <Login />,
+    hidden: false,
   },
   {
     key: 4,
@@ -67,6 +73,7 @@ export const routes = [
     title: "Muammolar",
     icon: <span className="fa-solid fa-circle-exclamation" />,
     element: token ? <Problems /> : <Login />,
+    hidden: false,
   },
   {
     key: 6,
@@ -74,14 +81,15 @@ export const routes = [
     title: "Statistik ma'lumotlar",
     icon: <span className="fa-solid fa-list-check" />,
     element: token ? <Stats /> : <Login />,
+    hidden: false,
   },
-
   {
     key: 7,
     path: "/user",
     title: "Tumanga admin yaratish",
     icon: <span className="fa-solid fa-user-shield" />,
     element: token ? <User /> : <Login />,
+    hidden: user_id !== 1,
   },
 ];
 
