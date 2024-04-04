@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   H1,
   Translated,
@@ -9,21 +10,27 @@ import {
   Empty,
   Text,
   P,
+  Dialog,
 } from "../../components";
 import { BASE_URL } from "../../constants";
 
 const index = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState(false);
   const [filter, setFilter] = useState({
     type: "",
     year: "",
     period: "",
+    state: "",
   });
+  const user_id = +sessionStorage.getItem("user_id");
 
   async function getData() {
     try {
-      const response = await axios.get("/statistics");
+      const response = await axios.get(
+        `/statistics${user_id !== 1 ? `/user/${user_id}` : ""}`
+      );
       setData(response.data);
       setLoading(false);
     } catch (error) {
@@ -36,6 +43,48 @@ const index = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  const handleChangeStatisticsState = async (e) => {
+    e.preventDefault();
+    const state = e.target.state.value;
+    const id = state.split("_")[1];
+    const data = { state: state.split("_")[0] };
+    console.log(data, id);
+
+    await axios
+      .patch(`/statistics/${id}`, data)
+      .then((res) => {
+        toast.success("Hisobot holati tahrirlandi");
+        setSuccess((old) => !old);
+        getData();
+      })
+      .catch(() => toast.error("Nimadadir xatolik ketdi. Qayta uruning"));
+  };
+
+  const getState = (state) => {
+    state = String(state);
+    if (state === "approved") {
+      return (
+        <div className="w-fit border-4 border-custom-green bg-custom-light-green rounded-full px-3 py-[1px]">
+          <span className="hidden md:inline-block">Tasdiqlangan</span>
+        </div>
+      );
+    } else if (state === "reviewing" || state === "null") {
+      return (
+        <div className="w-fit border-4 border-custom-yellow bg-custom-light-yellow rounded-full px-3 py-[1px]">
+          <span className="hidden md:inline-block">Ko'rib chiqilmoqda</span>
+        </div>
+      );
+    } else if (state === "cancelled") {
+      return (
+        <div className="w-fit border-4 border-custom-red bg-custom-light-red rounded-full px-3 py-[1px]">
+          <span className="hidden md:inline-block">Bekor qilingan</span>
+        </div>
+      );
+    } else {
+      return state;
+    }
+  };
 
   return (
     <div>
@@ -140,15 +189,52 @@ const index = () => {
             </select>
           </div>
         </div>
+        <div className="md:w-2/3 grid grid-cols-2 md:grid-cols-4 gap-5 mt-5">
+          <Button
+            onClick={() => setFilter((old) => ({ ...old, state: "" }))}
+            className={`bg-gray-200 ${filter.state === "" && "-translate-y-3"}`}
+          >
+            <Translated>Barchasi</Translated>
+          </Button>
+          <Button
+            onClick={() => setFilter((old) => ({ ...old, state: "approved" }))}
+            className={`bg-custom-green ${
+              filter.state === "approved" && "-translate-y-3"
+            }`}
+          >
+            <Translated>Tasdiqlanganlar</Translated>
+          </Button>
+          <Button
+            onClick={() => setFilter((old) => ({ ...old, state: null }))}
+            className={`bg-custom-yellow ${
+              filter.state === null && "-translate-y-3"
+            }`}
+          >
+            <Translated>Ko'rib chiqilayotganlar</Translated>
+          </Button>
+          <Button
+            onClick={() => setFilter((old) => ({ ...old, state: "cancelled" }))}
+            className={`bg-custom-red text-white ${
+              filter.state === "cancelled" && "-translate-y-3"
+            }`}
+          >
+            <Translated>Bekor qilinganlar</Translated>
+          </Button>
+        </div>
       </div>
       <div className="overflow-x-auto mt-5">
         <table className="table w-full bg-white text-center border">
           <thead className="border">
             <tr className="border">
               <th className="border p-2">#</th>
-              <th className="border p-2">
+              <th className="border p-2 w-1/3">
                 <Text>
                   <Translated>Hisobot</Translated>
+                </Text>
+              </th>
+              <th className="border p-2 w-1/4">
+                <Text>
+                  <Translated>Holati</Translated>
                 </Text>
               </th>
               <th className="border p-2">
@@ -168,6 +254,7 @@ const index = () => {
               ?.filter((item) => item?.type?.includes(filter.type))
               ?.filter((item) => item?.period?.includes(filter.period))
               ?.filter((item) => item?.year?.includes(filter.year))
+              ?.filter((item) => String(item?.state)?.includes(filter.state))
               ?.map?.((item, index) => (
                 <tr key={index} className="border">
                   <th className="border">{index + 1}</th>
@@ -176,7 +263,85 @@ const index = () => {
                     <p>
                       {item?.year} {item?.type}
                     </p>
-                    {item.name}
+                    {item?.name}
+                  </td>
+                  <td className="border">
+                    <div className="flex items-center justify-center gap-3">
+                      {getState(item?.state)}{" "}
+                      <Dialog
+                        btntitle={<span className="fa-solid fa-edit" />}
+                        btnClasses="py-1 rounded-full bg-white text-blue-500"
+                        title="Hisobot holatini tahrirlash"
+                        success={success}
+                      >
+                        <form
+                          onSubmit={handleChangeStatisticsState}
+                          className="w-full"
+                        >
+                          <div className="flex items-center justify-around my-8">
+                            <div className="flex items-center flex-row-reverse gap-2">
+                              <label htmlFor="approved">
+                                <Text>
+                                  <Translated>Tasdiqlangan</Translated>
+                                </Text>
+                              </label>
+                              <input
+                                type="radio"
+                                name="state"
+                                id="approved"
+                                defaultChecked={item?.state === "approved"}
+                                value={`approved_${item?.id}`}
+                                className="scale-[2] accent-custom-green"
+                              />
+                            </div>
+                            <div className="flex items-center flex-row-reverse gap-2">
+                              <label htmlFor="reviewing">
+                                <Text>
+                                  <Translated>Ko'rib chiqilmoqda</Translated>
+                                </Text>
+                              </label>
+                              <input
+                                type="radio"
+                                name="state"
+                                id="reviewing"
+                                defaultChecked={item?.state === null}
+                                value={`null_${item?.id}`}
+                                className="scale-[2] accent-custom-yellow"
+                              />
+                            </div>
+                            <div className="flex items-center flex-row-reverse gap-2">
+                              <label htmlFor="cancelled">
+                                <Text>
+                                  <Translated>Bekor qilingan</Translated>
+                                </Text>
+                              </label>
+                              <input
+                                type="radio"
+                                name="state"
+                                id="cancelled"
+                                defaultChecked={item?.state === "cancelled"}
+                                value={`cancelled_${item?.id}`}
+                                className="scale-[2] accent-custom-red"
+                              />
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-2 gap-3">
+                            <Button
+                              type="button"
+                              onClick={() => setSuccess((old) => !old)}
+                            >
+                              <Translated>Yopish</Translated>
+                            </Button>
+                            <Button
+                              type="submit"
+                              className="bg-blue-500 text-white"
+                            >
+                              <Translated>Yuborish</Translated>
+                            </Button>
+                          </div>
+                        </form>
+                      </Dialog>
+                    </div>
                   </td>
                   <td className="border">
                     <a
@@ -197,14 +362,14 @@ const index = () => {
               ))}{" "}
             {loading && (
               <tr>
-                <td colSpan={4}>
+                <td colSpan={5}>
                   <Loading />
                 </td>
               </tr>
             )}
             {data?.length === 0 && (
               <tr>
-                <td colSpan={4}>
+                <td colSpan={5}>
                   <Empty />
                 </td>
               </tr>

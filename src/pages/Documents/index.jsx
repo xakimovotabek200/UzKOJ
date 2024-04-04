@@ -8,10 +8,13 @@ import { BASE_URL } from "../../constants";
 const Index = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const user_id = +sessionStorage.getItem("user_id");
 
   async function getData() {
     try {
-      const response = await axios.get("/materials");
+      const response = await axios.get(
+        `/materials${user_id !== 1 ? `/user/${user_id}` : ""}`
+      );
       setData(response.data);
       setLoading(false);
     } catch (error) {

@@ -6,10 +6,13 @@ import { Link } from "react-router-dom";
 const index = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const user_id = +sessionStorage.getItem("user_id");
 
   async function getData() {
     try {
-      const response = await axios.get("events");
+      const response = await axios.get(
+        `events${user_id !== 1 ? `/user/${user_id}` : ""}`
+      );
       setData(response.data);
       setLoading(false);
     } catch (error) {
