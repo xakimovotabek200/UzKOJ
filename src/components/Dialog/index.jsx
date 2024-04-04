@@ -25,7 +25,7 @@ const index = (props) => {
 
       <dialog
         ref={ref}
-        className="w-6/12 bg-white border rounded p-3 backdrop:bg-black/40 "
+        className="w-11/12 md:w-6/12 bg-white border rounded p-3 backdrop:bg-black/40 "
       >
         <div className="flex items-center justify-between pb-2 border-b border-black/30 mb-3">
           <Text>
