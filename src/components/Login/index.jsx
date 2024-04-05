@@ -38,12 +38,12 @@ const Login = ({ setIsLoggedIn }) => {
       <div className="relative flex flex-col justify-center h-screen overflow-hidden">
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-lg">
           <h1 className="text-3xl font-semibold text-center text-purple-700">
-            UzKOJ
+            O'zKOJ
           </h1>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="label">
-                <span className="text-base ">Foydalanuvchi Nomi</span>
+                <span className="text-base ">Foydalanuvchi nomi</span>
               </label>
               <input
                 type="text"
