@@ -17,6 +17,9 @@ import AddRegisteredUser from "./Registered/AddRegisteredUser";
 import EditRegisteredUser from "./Registered/EditRegisteredUser";
 import AddStats from "./Stats/AddStats";
 import FullStats from "./Stats/FullStats";
+import Finance from "./Finance";
+import AddAccountantData from "./Finance/AddAccountantData";
+import AddFinanceData from "./Finance/AddFinanceData";
 
 export {
   Documents,
@@ -38,4 +41,7 @@ export {
   EditEvent,
   AddStats,
   FullStats,
+  Finance,
+  AddAccountantData,
+  AddFinanceData,
 };
