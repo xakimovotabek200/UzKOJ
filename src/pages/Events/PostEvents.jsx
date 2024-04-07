@@ -15,6 +15,7 @@ const index = () => {
     comment: "",
     photo: "",
     status: "",
+    file: "",
     userId: user_id,
   });
 
@@ -40,10 +41,17 @@ const index = () => {
       const form = new FormData();
       form.append("file", formData.photo);
       const image = await axios.post("images/upload", form);
-
       formData.photo = image?.data?.split(
         "Image uploaded successfully. Image URL: "
       )[1];
+
+      const form2 = new FormData();
+      form2.append("file", e.target.file.files[0]);
+      const uploaded_file = await axios.post("images/upload", form2);
+      formData.file = uploaded_file?.data?.split(
+        "Image uploaded successfully. Image URL: "
+      )[1];
+
       await axios.post("/events", formData);
       e.target.reset();
       toast.success("Tadbir qo'shildi");
@@ -160,6 +168,43 @@ const index = () => {
             required
           />
           {file && <img src={file} className="w-[400px]" alt="File Preview" />}
+        </div>
+        <div>
+          <div className="mb-2" />
+          <div className="mb-10 flex items-center gap-5">
+            <div className="relative">
+              <Button
+                type="button"
+                className="bg-blue-500 text-white whitespace-nowrap"
+              >
+                <label htmlFor="file" className="cursor-pointer">
+                  <Translated>Hisobotni yuklash</Translated>
+                </label>
+              </Button>
+              <input
+                type="file"
+                name="file"
+                id="file"
+                required
+                className="w-1 absolute left-2 top-1 -z-10"
+                accept=".xlsx, .xls"
+              />
+            </div>
+            <div className="flex flex-col gap-3 bg-white">
+              <Translated>
+                Tadbir hisobotini yuklashda maxsus Excel fayldan foydalaning.
+                Avval faylni yuklab oling va kerakli ma'lumotlarni kiriting.
+              </Translated>
+              <a
+                download
+                href={"/Tadbir.xlsx"}
+                className="text-blue-500 hover:text-blue-700"
+              >
+                <span className="fa-solid fa-download mr-1" />
+                <Translated>Faylni yuklab olish</Translated>
+              </a>
+            </div>
+          </div>
         </div>
 
         <div className="col-span-2">

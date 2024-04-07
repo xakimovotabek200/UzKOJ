@@ -1,6 +1,7 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Button, P, Text, Translated } from "../../components";
 import { BASE_URL } from "../../constants";
+import ExcelDataRenderer from "../../Excel";
 import DeleteEvents from "./DeleteEvents";
 
 const FullEvent = () => {
@@ -38,6 +39,11 @@ const FullEvent = () => {
             <Translated>Izoh</Translated>:
           </Text>
           <Text>{state?.comment}</Text>
+        </div>
+        <div>
+          <ExcelDataRenderer
+            file={BASE_URL + "/api/images/download/" + state?.file}
+          />
         </div>
         <div className="grid grid-cols-3 gap-5 mt-20">
           <div className="col-span-2">

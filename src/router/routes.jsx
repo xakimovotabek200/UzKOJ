@@ -7,6 +7,9 @@ import {
   Registered,
   Stats,
   User,
+  AddStats,
+  FullStats,
+  Finance,
   // hidden pages
   AddRegisteredUser,
   AddMember,
@@ -18,8 +21,8 @@ import {
   EditRegisteredUser,
   FullEvent,
   EditEvent,
-  AddStats,
-  FullStats,
+  AddAccountantData,
+  AddFinanceData,
 } from "../pages";
 import Home from "../components/Home";
 
@@ -85,6 +88,14 @@ export const routes = [
   },
   {
     key: 7,
+    path: "/finance",
+    title: "Buxgalteriya",
+    icon: <span className="fa-solid fa-vault" />,
+    element: token ? <Finance /> : <Login />,
+    hidden: false,
+  },
+  {
+    key: 8,
     path: "/user",
     title: "Tumanga admin yaratish",
     icon: <span className="fa-solid fa-user-shield" />,
@@ -153,5 +164,15 @@ export const hiddenRoutes = [
     key: 111,
     path: "/full-stats/:id",
     element: token ? <FullStats /> : <Login />,
+  },
+  {
+    key: 112,
+    path: "/add-accountant-data",
+    element: token ? <AddAccountantData /> : <Login />,
+  },
+  {
+    key: 113,
+    path: "/add-finance-data",
+    element: token ? <AddFinanceData /> : <Login />,
   },
 ];

@@ -20,7 +20,6 @@ const App = () => {
           setIsLoggedIn(false);
         }
       } catch (error) {
-        console.error("Error checking login status:", error);
         setIsLoggedIn(false);
       } finally {
         setLoading(false);

@@ -49,7 +49,6 @@ const index = () => {
     const state = e.target.state.value;
     const id = state.split("_")[1];
     const data = { state: state.split("_")[0] };
-    console.log(data, id);
 
     await axios
       .patch(`/statistics/${id}`, data)
