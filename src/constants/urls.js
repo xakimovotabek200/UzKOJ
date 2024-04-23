@@ -1,1 +1,1 @@
-export const BASE_URL = "http://37.77.104.188:8082";
+export const BASE_URL = "https://api.uzkoj-namangan.uz";
