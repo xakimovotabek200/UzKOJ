@@ -1,10 +1,106 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 import { routes } from "../../router/routes";
-import { P, Translated } from "../Typography";
+import { Button, Dialog } from "..";
+import { P, Text, Translated } from "../Typography";
 
 const index = () => {
+  const [data, setData] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const { passed } = useSelector((state) => state.deadline);
+  const user_id = sessionStorage.getItem("user_id");
+
+  async function getData() {
+    try {
+      const response = await axios.get("deadline");
+      setData(response.data);
+    } catch (error) {
+      return;
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function handleChangeDeadline(e) {
+    e.preventDefault();
+    const { time } = e.target;
+    const sentData = {
+      localDateTime: time.value,
+    };
+
+    try {
+      if (Boolean(data)) {
+        axios.patch(`deadline/${data?.[0].id}`, sentData);
+        e.target.reset();
+      } else {
+        axios.post("deadline", sentData);
+        e.target.reset();
+        toast.success("Sana belgilandi");
+      }
+      setSuccess(!success);
+    } catch (error) {
+      toast.error("Nimadadir xatolik ketdi. Qayta uruning!");
+    }
+  }
+
   return (
     <div>
+      <div
+        className={`border-2 rounded-lg p-3 shadow-lg mb-5 border-blue-500 ${
+          passed === true ? "border-green-400" : "border-red-500"
+        }`}
+      >
+        <div className="flex items-center gap-3">
+          <Text>
+            <Translated>Hisobotlarni yuklash uchun yakuniy sana:</Translated>
+          </Text>
+          <div className="flex items-center gap-2">
+            <Text>
+              {Boolean(data) ? (
+                data[0].localDateTime.replace("T", " ")
+              ) : (
+                <i>
+                  <Translated>Sana belgilanmagan</Translated>
+                </i>
+              )}
+            </Text>
+            {+user_id === 1 && (
+              <Dialog
+                btntitle={<span className="fa-solid fa-edit" />}
+                btnClasses="py-1 rounded-full bg-white text-blue-500"
+                title="Yakuniy sana belgilash"
+                success={success}
+              >
+                <form onSubmit={handleChangeDeadline} className="w-full">
+                  <input
+                    type="datetime-local"
+                    name="time"
+                    required
+                    className="w-full border border-gray-300 p-2 mb-3"
+                  />
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button
+                      type="button"
+                      onClick={() => setSuccess((old) => !old)}
+                    >
+                      <Translated>Yopish</Translated>
+                    </Button>
+                    <Button type="submit" className="bg-blue-500 text-white">
+                      <Translated>Yuborish</Translated>
+                    </Button>
+                  </div>
+                </form>
+              </Dialog>
+            )}
+          </div>
+        </div>
+      </div>
       <div className="p-2 w-full grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-center">
         {routes
           ?.filter((item) => !item.hidden)
