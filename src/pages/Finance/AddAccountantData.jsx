@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Button, Text, Translated } from "../../components";
+import { Button, P, Text, Translated } from "../../components";
 
 const AddMember = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const AddMember = () => {
     file1: null,
     file2: null,
   });
+  const { passed } = useSelector((state) => state.deadline);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -48,6 +50,17 @@ const AddMember = () => {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (!passed) {
+    return (
+      <div className="text-center">
+        <span className="fa-solid fa-warning block text-red-600 text-4xl" />
+        <P>
+          <Translated>Hisobot yuklash muddati o'tgan!</Translated>
+        </P>
+      </div>
+    );
   }
 
   return (

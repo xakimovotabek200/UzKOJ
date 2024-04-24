@@ -1,11 +1,13 @@
 import axios from "axios";
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Button, Text, Translated } from "../../components";
+import { Button, P, Text, Translated } from "../../components";
 
 const AddStats = () => {
   const navigate = useNavigate();
+  const { passed } = useSelector((state) => state.deadline);
   const user_id = sessionStorage.getItem("user_id");
 
   async function handleSubmit(e) {
@@ -37,6 +39,17 @@ const AddStats = () => {
     } catch (error) {
       toast.error("Nimadadir xatolik ketdi. Qayta uruning!");
     }
+  }
+
+  if (!passed) {
+    return (
+      <div className="text-center">
+        <span className="fa-solid fa-warning block text-red-600 text-4xl" />
+        <P>
+          <Translated>Hisobot yuklash muddati o'tgan!</Translated>
+        </P>
+      </div>
+    );
   }
 
   return (
