@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -17,13 +19,18 @@ const index = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { type } = useSelector((state) => state.text);
+  const [pagesListOpen, setPagesListOpen] = useState(false);
+
+  useEffect(() => {
+    setPagesListOpen(false);
+  }, [location]);
 
   return (
     <>
       <div className="w-full bg-blue-500 text-white p-3 flex items-center justify-between">
         {/* menu */}
-        <details className="relative">
-          <summary className="flex">
+        <details open={pagesListOpen} className="relative">
+          <summary onClick={() => setPagesListOpen(true)} className="flex">
             <P role={"button"} className="flex items-center gap-2">
               <span className="fa-solid fa-bars" />
               <Translated>Sahifalar</Translated>
