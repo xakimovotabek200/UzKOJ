@@ -35,12 +35,17 @@ const index = () => {
 
     try {
       if (Boolean(data)) {
-        axios.patch(`deadline/${data?.[0].id}`, sentData);
+        const formData = new FormData();
+        formData.append("localDateTime", sentData.localDateTime);
+        axios.patch(`deadline/${data?.[0].id}`, formData);
+        getData();
+        window.location.reload();
         e.target.reset();
       } else {
         axios.post("deadline", sentData);
-        e.target.reset();
+        getData();
         toast.success("Sana belgilandi");
+        e.target.reset();
       }
       setSuccess(!success);
     } catch (error) {
