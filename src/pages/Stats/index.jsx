@@ -1,4 +1,5 @@
 import axios from "axios";
+import fileDownload from "js-file-download";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -25,6 +26,7 @@ const index = () => {
     state: "",
   });
   const user_id = +sessionStorage.getItem("user_id");
+  const token = sessionStorage.getItem("token");
 
   async function getData() {
     try {
@@ -84,6 +86,23 @@ const index = () => {
       return state;
     }
   };
+
+  async function downloadExcel(url) {
+    axios({
+      method: "get",
+      url: url,
+      responseType: "blob",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        fileDownload(response.data, "Barcha-tuman-hisobotlari.xlsx");
+      })
+      .catch((error) => {
+        toast.error("Hisobotni yuklab olishda xatolik");
+      });
+  }
 
   return (
     <div>
@@ -378,12 +397,15 @@ const index = () => {
 
         {user_id === 1 && (
           <div hidden={data === null || data?.length === 0} className="mt-10">
-            <a href={BASE_URL + "/api/statistics/merge-and-download"} download>
-              <Button className="py-1 flex items-center gap-2">
-                <span className="fa-solid fa-download cursor-pointer text-blue-500 mr-2" />
-                <Translated>Barcha hisobotlarni yuklab olish</Translated>
-              </Button>
-            </a>
+            <Button
+              onClick={() =>
+                downloadExcel(BASE_URL + "/api/statistics/merge-and-download")
+              }
+              className="py-1 flex items-center gap-2"
+            >
+              <span className="fa-solid fa-download cursor-pointer text-blue-500 mr-2" />
+              <Translated>Barcha hisobotlarni yuklab olish</Translated>
+            </Button>
           </div>
         )}
       </div>
