@@ -67,7 +67,7 @@ const index = () => {
           <div className="flex items-center gap-2">
             <Text>
               {Boolean(data) ? (
-                data[0].localDateTime.replace("T", " ")
+                data?.[0]?.localDateTime?.replace("T", " ")
               ) : (
                 <i>
                   <Translated>Sana belgilanmagan</Translated>

@@ -375,6 +375,17 @@ const index = () => {
             )}
           </tbody>
         </table>
+
+        {user_id === 1 && (
+          <div hidden={data === null || data?.length === 0} className="mt-10">
+            <a href={BASE_URL + "/api/statistics/merge-and-download"} download>
+              <Button className="py-1 flex items-center gap-2">
+                <span className="fa-solid fa-download cursor-pointer text-blue-500 mr-2" />
+                <Translated>Barcha hisobotlarni yuklab olish</Translated>
+              </Button>
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );
