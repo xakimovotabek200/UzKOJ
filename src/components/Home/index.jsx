@@ -34,18 +34,19 @@ const index = () => {
     };
 
     try {
-      if (Boolean(data)) {
+      if (data.length > 0) {
         const formData = new FormData();
         formData.append("localDateTime", sentData.localDateTime);
-        axios.patch(`deadline/${data?.[0].id}`, formData);
-        getData();
-        window.location.reload();
-        e.target.reset();
+        axios.patch(`deadline/${data?.[0].id}`, formData).then(() => {
+          window.location.reload();
+          e.target.reset();
+        });
       } else {
         axios.post("deadline", sentData);
-        getData();
-        toast.success("Sana belgilandi");
-        e.target.reset();
+        toast.success("Sana belgilandi", { autoClose: 1500 });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       }
       setSuccess(!success);
     } catch (error) {
