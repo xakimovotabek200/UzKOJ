@@ -42,11 +42,12 @@ const index = () => {
           e.target.reset();
         });
       } else {
-        axios.post("deadline", sentData);
-        toast.success("Sana belgilandi", { autoClose: 1500 });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
+        axios.post("deadline", sentData).then(() => {
+          toast.success("Sana belgilandi", { autoClose: 1500 });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        });
       }
       setSuccess(!success);
     } catch (error) {
