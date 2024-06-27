@@ -13,8 +13,13 @@ const App = () => {
 
   async function checkDeadline() {
     try {
-      const isOkResponse = await axios.get("deadline/1");
-      dispatch(changeDeadlineStatus(isOkResponse.data));
+      const response = await axios.get("deadline");
+      if (response.data.length > 0) {
+        const isOkResponse = await axios.get(
+          `deadline/${response.data?.[0]?.id}`
+        );
+        dispatch(changeDeadlineStatus(isOkResponse.data));
+      }
     } catch (error) {
       dispatch(changeDeadlineStatus(true));
       return;
